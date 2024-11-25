@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 const Monopo = () => {
   const [hoveredWords, setHoveredWords] = useState(new Map());
@@ -30,7 +30,7 @@ const Monopo = () => {
     }
   ];
 
-  const handleMouseMove = useCallback((e) => {
+  const handleMouseMove = (e: MouseEvent) => {
     const { clientX, clientY } = e;
     const radius = 96;
     const elements = document.querySelectorAll('.word');
@@ -51,12 +51,12 @@ const Monopo = () => {
         clientY - radius < rect.bottom;
 
       if (intersects) {
-        newHoveredWords.set(index, element.dataset.word);
+        newHoveredWords.set(index, (element as HTMLElement).dataset.word);
       }
     });
 
     setHoveredWords(newHoveredWords);
-  }, []);
+  };
 
   useEffect(() => {
     window.addEventListener('mousemove', handleMouseMove);
