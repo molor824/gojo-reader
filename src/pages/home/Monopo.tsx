@@ -36,7 +36,6 @@ const Monopo = () => {
     const elements = document.querySelectorAll('.word');
     const newHoveredWords = new Map();
 
-    // Smooth mouse position update
     setMousePosition({
       x: clientX / window.innerWidth,
       y: clientY / window.innerHeight
@@ -65,7 +64,6 @@ const Monopo = () => {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#0A0A0A]">
-      {/* Primary gradient (purple/pink) */}
       <div 
         className="absolute inset-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
         style={{
@@ -74,7 +72,6 @@ const Monopo = () => {
         }}
       />
 
-      {/* Secondary gradient (cyan/blue) */}
       <div 
         className="absolute inset-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
         style={{
@@ -83,7 +80,6 @@ const Monopo = () => {
         }}
       />
 
-      {/* Accent gradient (magenta/purple) */}
       <div 
         className="absolute inset-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
         style={{
@@ -92,10 +88,8 @@ const Monopo = () => {
         }}
       />
 
-      {/* Blur Overlay */}
       <div className="absolute inset-0 backdrop-blur-[120px]" />
 
-      {/* Content */}
       <div className="relative z-10 flex items-center justify-center min-h-screen">
         <div className="max-w-[1400px] text-center">
           <h1 className="text-white text-[7vw] font-[275] leading-[0.9] tracking-[-0.02em]">
