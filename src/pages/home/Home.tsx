@@ -1,11 +1,13 @@
+import Monopo from './Monopo';
+
 export const Home = () => {
   return (
-    <main className="pt-24">
-      {/* Hero Section */}
-      <section className="min-h-screen px-6 flex flex-col justify-center max-w-7xl mx-auto">
-        <h1 className="text-5xl md:text-7xl font-bold mb-12 leading-tight">
-          We are a brand of collective creativity
-        </h1>
+    <main>
+      {/* Monopo Hero Section */}
+      <Monopo />
+
+      {/* London Section */}
+      <section className="px-6 flex flex-col justify-center max-w-7xl mx-auto py-24">
         <div className="space-y-4 text-xl">
           <p className="flex gap-4">
             <span className="font-bold">Based in London</span>
@@ -19,7 +21,6 @@ export const Home = () => {
             <span className="font-bold">Branding, digital</span>
             <span className="text-gray-400">and communications</span>
           </p>
-          00
         </div>
       </section>
 

@@ -4,8 +4,8 @@ export const Header = () => {
       <nav className="flex justify-between items-center max-w-7xl mx-auto">
         <div className="text-2xl font-bold">monopo</div>
 
-        <div className="hidden md:flex space-x-8">
-          <a href="#home" className="hover:text-gray-400 transition-colors">
+        <div className="hidden md:flex space-x-8 font-bold">
+          <a href="#home" className="hover:text-gray-400 transition-colors ">
             Home
           </a>
           <a href="#work" className="hover:text-gray-400 transition-colors">

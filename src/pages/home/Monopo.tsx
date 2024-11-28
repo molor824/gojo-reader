@@ -63,18 +63,18 @@ const Monopo = () => {
   }, [handleMouseMove]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#0A0A0A]">
+    <div className="relative min-h-screen overflow-hidden bg-black">
       <div 
         className="absolute inset-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
         style={{
-          background: 'radial-gradient(75% 75% at 50% 50%, rgba(94, 2, 244, 0.08) 0%, rgba(255, 0, 140, 0) 100%)',
+          background: 'radial-gradient(75% 75% at 50% 50%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%)',
           transform: `scale(2) translate(${(mousePosition.x - 0.5) * -15}px, ${(mousePosition.y - 0.5) * -15}px)`,
         }}
       />
       <div 
         className="absolute inset-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
         style={{
-          background: 'radial-gradient(50% 50% at 50% 50%, rgba(0, 255, 240, 0.04) 0%, rgba(0, 89, 255, 0) 100%)',
+          background: 'radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.04) 0%, rgba(0, 89, 255, 0) 100%)',
           transform: `scale(2) translate(${(mousePosition.x - 0.5) * 20}px, ${(mousePosition.y - 0.5) * 20}px)`,
         }}
       />
