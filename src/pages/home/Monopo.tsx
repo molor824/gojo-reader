@@ -32,7 +32,7 @@ const Monopo = () => {
 
   const handleMouseMove = (e: MouseEvent) => {
     const { clientX, clientY } = e;
-    const radius = 96;
+    const radius = 10;
     const elements = document.querySelectorAll('.word');
     const newHoveredWords = new Map();
 
@@ -87,7 +87,7 @@ const Monopo = () => {
       />
       <div className="absolute inset-0 backdrop-blur-[120px]" />
       <div className="relative z-10 flex items-center justify-center min-h-screen">
-        <div className="max-w-[1400px] text-center">
+        <div className="max-w-[1400px] ml-[-100px] text-center">
           <h1 className="text-white text-[7vw] font-[275] leading-[0.9] tracking-[-0.02em]">
             {lines.map((line, lineIndex) => (
               <div 
