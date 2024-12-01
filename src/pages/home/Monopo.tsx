@@ -63,32 +63,14 @@ const Monopo = () => {
   }, [handleMouseMove]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black">
-      <div 
-        className="absolute inset-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
-        style={{
-          background: 'radial-gradient(75% 75% at 50% 50%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 100%)',
-          transform: `scale(2) translate(${(mousePosition.x - 0.5) * -15}px, ${(mousePosition.y - 0.5) * -15}px)`,
-        }}
-      />
-      <div 
-        className="absolute inset-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
-        style={{
-          background: 'radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.04) 0%, rgba(0, 89, 255, 0) 100%)',
-          transform: `scale(2) translate(${(mousePosition.x - 0.5) * 20}px, ${(mousePosition.y - 0.5) * 20}px)`,
-        }}
-      />
-      <div 
-        className="absolute inset-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
-        style={{
-          background: 'radial-gradient(35% 35% at 50% 50%, rgba(255, 0, 199, 0.04) 0%, rgba(94, 2, 244, 0) 100%)',
-          transform: `scale(2) translate(${(mousePosition.x - 0.5) * -25}px, ${(mousePosition.y - 0.5) * -25}px)`,
-        }}
-      />
+    <div className="relative overflow-hidden bg-black" style={{ maxHeight: '80vh' }}>
+      <div className="absolute inset-0 bg-black" />
+      <div className="absolute inset-0 bg-black" />
+      <div className="absolute inset-0 bg-black" />
       <div className="absolute inset-0 backdrop-blur-[120px]" />
       <div className="relative z-10 flex items-center justify-center min-h-screen">
         <div className="max-w-[1400px] ml-[-100px] text-center">
-          <h1 className="text-white text-[7vw] font-[275] leading-[0.9] tracking-[-0.02em]">
+          <h1 className="text-white text-[6vw] font-[275] leading-[0.9] tracking-[-0.02em]">
             {lines.map((line, lineIndex) => (
               <div 
                 key={lineIndex} 

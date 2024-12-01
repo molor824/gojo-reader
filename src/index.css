@@ -17,3 +17,20 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+
+.text-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: center; /* Center vertically */
+    align-items: center; /* Center horizontally */
+    height: 100vh; /* Full height of the viewport */
+    color: #fff; /* White text color */
+    text-align: center; /* Center text alignment */
+}
+
+.text-line {
+    margin: 0; /* Remove default margin */
+    font-size: 24px; /* Adjust font size as needed */
+    line-height: 1.5; /* Adjust line height for spacing */
+}
+

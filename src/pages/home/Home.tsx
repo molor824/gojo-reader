@@ -3,24 +3,20 @@ import Monopo from './Monopo';
 export const Home = () => {
   return (
     <main>
-      {/* Monopo Hero Section */}
       <Monopo />
 
-      {/* London Section */}
-      <section className="px-6 flex flex-col justify-center max-w-7xl mx-auto py-24">
-        <div className="space-y-4 text-xl">
-          <p className="flex gap-4">
-            <span className="font-bold">Based in London</span>
-            <span className="text-gray-400">Born in Tokyo</span>
-          </p>
-          <p className="flex gap-4">
-            <span className="font-bold">Design-driven</span>
-            <span className="text-gray-400">creative agency</span>
-          </p>
-          <p className="flex gap-4">
-            <span className="font-bold">Branding, digital</span>
-            <span className="text-gray-400">and communications</span>
-          </p>
+      <section className="px-6 flex flex-col justify-center max-w-7xl mx-auto mt-[-330px] ">
+        <div className="text-container flex flex-col items-center ">
+          <div className="flex justify-between w-full ">
+            <p className="text-xl font-bold">Based in London</p>
+            <p className="text-xl font-bold">Design-driven</p>
+            <p className="text-xl font-bold">Branding, digital</p>
+          </div>
+          <div className="flex justify-between w-full">
+            <p className="text-lg text-gray-300 ">Born in Tokyo</p>
+            <p className="text-lg text-gray-300 ml-[40px]">creative agency</p>
+            <p className="text-lg text-gray-300 mr-[-10px]">and communications</p>
+          </div>
         </div>
       </section>
 
