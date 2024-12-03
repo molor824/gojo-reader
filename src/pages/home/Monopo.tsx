@@ -32,11 +32,10 @@ const Monopo = () => {
 
   const handleMouseMove = (e: MouseEvent) => {
     const { clientX, clientY } = e;
-    const radius = 96;
+    const radius = 10;
     const elements = document.querySelectorAll('.word');
     const newHoveredWords = new Map();
 
-    // Smooth mouse position update
     setMousePosition({
       x: clientX / window.innerWidth,
       y: clientY / window.innerHeight
@@ -64,41 +63,14 @@ const Monopo = () => {
   }, [handleMouseMove]);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#0A0A0A]">
-      {/* Primary gradient (purple/pink) */}
-      <div 
-        className="absolute inset-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
-        style={{
-          background: 'radial-gradient(75% 75% at 50% 50%, rgba(94, 2, 244, 0.08) 0%, rgba(255, 0, 140, 0) 100%)',
-          transform: `scale(2) translate(${(mousePosition.x - 0.5) * -15}px, ${(mousePosition.y - 0.5) * -15}px)`,
-        }}
-      />
-
-      {/* Secondary gradient (cyan/blue) */}
-      <div 
-        className="absolute inset-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
-        style={{
-          background: 'radial-gradient(50% 50% at 50% 50%, rgba(0, 255, 240, 0.04) 0%, rgba(0, 89, 255, 0) 100%)',
-          transform: `scale(2) translate(${(mousePosition.x - 0.5) * 20}px, ${(mousePosition.y - 0.5) * 20}px)`,
-        }}
-      />
-
-      {/* Accent gradient (magenta/purple) */}
-      <div 
-        className="absolute inset-0 transition-all duration-[1800ms] ease-[cubic-bezier(0.23,1,0.32,1)]"
-        style={{
-          background: 'radial-gradient(35% 35% at 50% 50%, rgba(255, 0, 199, 0.04) 0%, rgba(94, 2, 244, 0) 100%)',
-          transform: `scale(2) translate(${(mousePosition.x - 0.5) * -25}px, ${(mousePosition.y - 0.5) * -25}px)`,
-        }}
-      />
-
-      {/* Blur Overlay */}
+    <div className="relative overflow-hidden bg-black" style={{ maxHeight: '80vh' }}>
+      <div className="absolute inset-0 bg-black" />
+      <div className="absolute inset-0 bg-black" />
+      <div className="absolute inset-0 bg-black" />
       <div className="absolute inset-0 backdrop-blur-[120px]" />
-
-      {/* Content */}
       <div className="relative z-10 flex items-center justify-center min-h-screen">
-        <div className="max-w-[1400px] text-center">
-          <h1 className="text-white text-[7vw] font-[275] leading-[0.9] tracking-[-0.02em]">
+        <div className="max-w-[1400px] ml-[-100px] text-center">
+          <h1 className="text-white text-[6vw] font-[275] leading-[0.9] tracking-[-0.02em]">
             {lines.map((line, lineIndex) => (
               <div 
                 key={lineIndex} 
