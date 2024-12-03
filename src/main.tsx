@@ -3,19 +3,18 @@ import { StrictMode } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import { Home } from "./pages/home/Home";
-import Monopo from "./pages/home/Monopo";
 import { Error } from "./pages/error/Error";
+import { Flashcard } from "./pages/Flashcart";
 import "./index.css";
 
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
-    children: [
-      { path: "", element: <Home /> },
-      { path: "monopo", element: <Monopo /> },
-    ],
     errorElement: <Error />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/flashcard", element: <Flashcard /> },
+    ],
   },
 ]);
 
