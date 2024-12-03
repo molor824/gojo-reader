@@ -1,22 +1,41 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {
-      // animation: {
-      //   fadeIn: "fadeIn 1s ease-out forwards",
-      // },
-      // keyframes:{
-      //   fadeIn:{
-      //     "0%":{opacity: 0 , transform: "translateY(1rem)"},
-      //     "100%":{opacity: 1 , transform: "translateY(0)"},
-      //   },
-      // },
+      perspective: {
+        '1000': '1000px',
+      },
+      rotate: {
+        'y-180': '180deg',
+      },
+      transformStyle: {
+        '3d': 'preserve-3d',
+      },
+      backfaceVisibility: {
+        'hidden': 'hidden',
+      },
     },
   },
-  plugins: [],
-}
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.perspective-1000': {
+          perspective: '1000px',
+        },
+        '.rotate-y-180': {
+          transform: 'rotateY(180deg)',
+        },
+        '.transform-style-3d': {
+          transformStyle: 'preserve-3d',
+        },
+        '.backface-hidden': {
+          backfaceVisibility: 'hidden',
+        },
+      });
+    },
+  ],
+};
 
