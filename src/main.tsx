@@ -5,13 +5,16 @@ import App from "./App";
 import { Home } from "./pages/home/Home";
 import "./index.css";
 import { Error } from "./pages/error/Error";
+import { Flashcard } from "./pages/Flashcart";
 
 const router = createBrowserRouter([
   {
-    path: "/",
     element: <App />,
     errorElement: <Error />,
-    children: [{ path: "", element: <Home /> }],
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "/flashcard", element: <Flashcard /> },
+    ],
   },
 ]);
 
