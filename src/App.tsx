@@ -15,16 +15,3 @@ function App() {
 }
 
 export default App;
-
-// function App() {
-//   return (
-//     <div className="bg-black text-white min-h-screen">
-//       <Header />
-//       <Outlet />
-//       <Footer />
-//       <Flashcard />
-//     </div>
-//   );
-// }
-
-// export default App;
