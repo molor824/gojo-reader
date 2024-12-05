@@ -2,7 +2,7 @@ import Monopo from "./Monopo";
 
 export const Home = () => {
   return (
-    <section className="page-section p-8">
+    <section className="container flex flex-col items-center p-8">
       <Monopo />
 
       {/* <section className="px-6 py-24 max-w-7xl mx-auto">
