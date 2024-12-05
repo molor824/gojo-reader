@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 const NAVBAR_ITEMS = [
   { title: "Home", link: "/" },
   { title: "Read", link: "/read" },
-  { title: "Flashcard", link: "/flashcard" },
+  { title: "Review", link: "/review" },
   { title: "About Us", link: "/about" },
 ];
 
@@ -12,7 +12,7 @@ export const Header = () => {
   const location = useLocation();
   const [extend, setExtend] = useState(false);
   return (
-    <header className="fixed w-full top-0 z-50 px-6 py-4 bg-black/50 backdrop-blur-sm">
+    <header className="sticky w-full top-0 z-50 px-6 py-4 bg-black/50 backdrop-blur-sm">
       <nav className="flex justify-between items-center container mx-auto">
         <Link to="/" className="text-2xl font-bold">
           Gojo-Reader
