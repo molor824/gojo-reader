@@ -1,18 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300&family=Noto+Sans+JP:wght@200;300&display=swap');
-@import url("https://use.typekit.net/your-kit-code.css"); 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300&family=Noto+Sans+JP:wght@200;300&display=swap");
+@import url("https://use.typekit.net/your-kit-code.css");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
-  font-family: 'neue-haas-grotesk-display';
-  src: local('Helvetica Neue');
+  font-family: "neue-haas-grotesk-display";
+  src: local("Helvetica Neue");
   font-weight: 275;
 }
 
 @layer base {
   :root {
-    @apply bg-black text-white
+    @apply bg-black text-white;
+  }
+  .page-section {
+    @apply w-full h-full flex flex-col items-center justify-center;
   }
 }

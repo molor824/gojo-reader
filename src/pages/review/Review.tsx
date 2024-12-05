@@ -19,7 +19,7 @@ export const Review = () => {
   const [currentCard, setCurrentCard] = useState(0);
 
   return (
-    <section className="flex flex-col justify-center items-center gap-8 p-8">
+    <section className="page-section gap-8 p-8">
       <div className="max-w-64 w-full">
         <KanjiFlashcard
           reveal={reveal}
