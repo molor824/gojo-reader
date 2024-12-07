@@ -4,25 +4,14 @@ import { Footer } from "./components/Footer";
 
 function App() {
   return (
-    <div className="bg-black text-white">
+    <div className="flex flex-col min-h-screen">
       <Header />
-      <Outlet />
+      <div className="flex-grow flex items-center justify-center">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );
 }
 
 export default App;
-
-// function App() {
-//   return (
-//     <div className="bg-black text-white min-h-screen">
-//       <Header />
-//       <Outlet />
-//       <Footer />
-//       <Flashcard />
-//     </div>
-//   );
-// }
-
-// export default App;

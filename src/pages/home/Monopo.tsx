@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const Monopo = () => {
   const [hoveredWords, setHoveredWords] = useState(new Map());
-  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+  const [_mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
 
   const lines = [
     {
@@ -12,38 +12,36 @@ const Monopo = () => {
         { en: "a", ja: "ある" },
         { en: "brand", ja: "ブランド" },
       ],
-      align: 'center'
+      align: "center",
     },
 
     {
       words: [
-        { en: "of", ja: "の", alignWith: 'are' },
+        { en: "of", ja: "の", alignWith: "are" },
         { en: "collective", ja: "集合的な" },
       ],
-      align: 'special'
+      align: "special",
     },
     {
-      words: [
-        { en: "creativity", ja: "創造性" },
-      ],
-      align: 'center'
-    }
+      words: [{ en: "creativity", ja: "創造性" }],
+      align: "center",
+    },
   ];
 
   const handleMouseMove = (e: MouseEvent) => {
     const { clientX, clientY } = e;
     const radius = 10;
-    const elements = document.querySelectorAll('.word');
+    const elements = document.querySelectorAll(".word");
     const newHoveredWords = new Map();
 
     setMousePosition({
       x: clientX / window.innerWidth,
-      y: clientY / window.innerHeight
+      y: clientY / window.innerHeight,
     });
 
     elements.forEach((element, index) => {
       const rect = element.getBoundingClientRect();
-      const intersects = 
+      const intersects =
         clientX + radius > rect.left &&
         clientX - radius < rect.right &&
         clientY + radius > rect.top &&
@@ -58,12 +56,15 @@ const Monopo = () => {
   };
 
   useEffect(() => {
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [handleMouseMove]);
 
   return (
-    <div className="relative overflow-hidden bg-black" style={{ maxHeight: '80vh' }}>
+    <div
+      className="relative overflow-hidden bg-black"
+      style={{ maxHeight: "80vh" }}
+    >
       <div className="absolute inset-0 bg-black" />
       <div className="absolute inset-0 bg-black" />
       <div className="absolute inset-0 bg-black" />
@@ -72,31 +73,44 @@ const Monopo = () => {
         <div className="max-w-[1400px] ml-[-100px] text-center">
           <h1 className="text-white text-[6vw] font-[275] leading-[0.9] tracking-[-0.02em]">
             {lines.map((line, lineIndex) => (
-              <div 
-                key={lineIndex} 
+              <div
+                key={lineIndex}
                 className={`flex items-baseline mb-2 ${
-                  line.align === 'center' ? 'justify-center' : 
-                  line.align === 'special' ? 'justify-center ml-[5.2em]' : ''
+                  line.align === "center"
+                    ? "justify-center"
+                    : line.align === "special"
+                    ? "justify-center ml-[5.2em]"
+                    : ""
                 }`}
               >
                 {line.words.map((word, wordIndex) => {
-                  const globalIndex = lines.slice(0, lineIndex).reduce((acc, curr) => acc + curr.words.length, 0) + wordIndex;
+                  const globalIndex =
+                    lines
+                      .slice(0, lineIndex)
+                      .reduce((acc, curr) => acc + curr.words.length, 0) +
+                    wordIndex;
                   return (
                     <span
                       key={wordIndex}
                       className="word inline-block mx-[0.2em] transition-all duration-[400ms] ease-out"
                       style={{
-                        fontFamily: hoveredWords.has(globalIndex) ? '"Noto Sans JP", sans-serif' : 'neue-haas-grotesk-display, sans-serif',
+                        fontFamily: hoveredWords.has(globalIndex)
+                          ? '"Noto Sans JP", sans-serif'
+                          : "neue-haas-grotesk-display, sans-serif",
                         fontWeight: hoveredWords.has(globalIndex) ? 300 : 275,
-                        fontSize: hoveredWords.has(globalIndex) ? '0.75em' : '1em',
+                        fontSize: hoveredWords.has(globalIndex)
+                          ? "0.75em"
+                          : "1em",
                         opacity: 0.92,
-                        willChange: 'transform, opacity',
+                        willChange: "transform, opacity",
                       }}
                     >
-                      <span 
+                      <span
                         className="inline-block transition-transform duration-[400ms] ease-out"
                         style={{
-                          transform: hoveredWords.has(globalIndex) ? 'translateY(0.05em)' : 'translateY(0)'
+                          transform: hoveredWords.has(globalIndex)
+                            ? "translateY(0.05em)"
+                            : "translateY(0)",
                         }}
                       >
                         {hoveredWords.has(globalIndex) ? word.ja : word.en}
@@ -113,4 +127,4 @@ const Monopo = () => {
   );
 };
 
-export default Monopo; 
+export default Monopo;

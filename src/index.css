@@ -1,36 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300&family=Noto+Sans+JP:wght@200;300&display=swap");
+@import url("https://use.typekit.net/your-kit-code.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300&family=Noto+Sans+JP:wght@200;300&display=swap');
-@import url("https://use.typekit.net/your-kit-code.css"); 
-
 @font-face {
-  font-family: 'neue-haas-grotesk-display';
-  src: local('Helvetica Neue');
+  font-family: "neue-haas-grotesk-display";
+  src: local("Helvetica Neue");
   font-weight: 275;
 }
 
-
-.absolute {
-  will-change: transform;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
+@layer base {
+  :root {
+    @apply bg-black text-white;
+  }
 }
-
-.text-container {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    justify-content: center; /* Center vertically */
-    align-items: center; /* Center horizontally */
-    height: 100vh; /* Full height of the viewport */
-    color: #fff; /* White text color */
-    text-align: center; /* Center text alignment */
-}
-
-.text-line {
-    margin: 0; /* Remove default margin */
-    font-size: 24px; /* Adjust font size as needed */
-    line-height: 1.5; /* Adjust line height for spacing */
-}
-
