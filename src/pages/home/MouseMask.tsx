@@ -29,7 +29,7 @@ export const MouseMask = ({ greeting, greetingJp }: Props) => {
   return (
     <>
       <div
-        className="relative text-6xl font-bold text-center w-full h-[400px] flex flex-col items-center justify-center"
+        className="relative text-8xl font-bold text-center w-full h-[850px] flex flex-col items-center justify-center"
         onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
       >
         <div
@@ -40,7 +40,7 @@ export const MouseMask = ({ greeting, greetingJp }: Props) => {
           }}
         >
           <h1
-            className="absolute top-0 left-0 text-center text-6xl font-bold"
+            className="absolute top-0 left-0 text-center text-8xl font-bold"
             style={{
               width: greetingRect.width,
               height: greetingRect.height,
