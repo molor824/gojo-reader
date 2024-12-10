@@ -1,5 +1,11 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
 
 const NAVBAR_ITEMS = [
   { title: "Home", link: "/" },
@@ -30,6 +36,26 @@ export const Header = () => {
               {title}
             </Link>
           ))}
+
+          <SignedOut>
+            <SignInButton>
+              <button className=" border  rounded-2xl p-2 text-gray-200 hover:bg-white/20  px-4">
+                Нэвтрэх
+              </button>
+            </SignInButton>
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton 
+              showName
+              appearance={{
+                elements: {
+                  userButtonAvatarBox: "border-2 border-white",
+                  userButtonTrigger: "text-white hover:opacity-75"
+                }
+              }}
+            />
+          </SignedIn>
         </div>
 
         {/* Mobile menu button */}
@@ -68,6 +94,24 @@ export const Header = () => {
                 {title}
               </Link>
             ))}
+            <li className="mx-4 my-6 md:my-0 border-white hover:border-gray-200 border-4 rounded-xl duration-500">
+              <SignedOut>
+                <SignInButton>Нэвтрэх</SignInButton>
+              </SignedOut>
+             
+
+              <SignedIn>
+                <UserButton 
+                  showName
+                  appearance={{
+                    elements: {
+                      userButtonAvatarBox: "border-2 border-white",
+                      userButtonTrigger: "text-white hover:opacity-75"
+                    }
+                  }}
+                />
+              </SignedIn>
+            </li>
           </div>
         </>
       )}
