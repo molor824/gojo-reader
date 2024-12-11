@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { speak } from "../utils/speech";
 
 interface KanjiProps {
