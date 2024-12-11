@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { DefinitionCard } from "./DefinitionCard";
+import { JapanWord } from "./JapanWord";
 
 type Props = {
   text: string;
@@ -16,21 +16,12 @@ export const JapanText = ({ text }: Props) => {
   return (
     <div>
       {words.map((word, index) => (
-        <span
-          className={`${
-            index === selectedWord ? "font-bold" : ""
-          } hover:underline`}
-          onClick={() =>
-            setSelectedWord(selectedWord === index ? undefined : index)
-          }
-        >
-          {word}
-          {index === selectedWord && (
-            <div className="absolute top-full left-0 w-[400px] max-w-[calc(100vw-2rem)]">
-              <DefinitionCard word={word} />
-            </div>
-          )}
-        </span>
+        <JapanWord
+          word={word}
+          key={index}
+          showDefinition={index === selectedWord}
+          onClick={() => setSelectedWord(index)}
+        />
       ))}
     </div>
   );

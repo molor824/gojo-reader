@@ -4,49 +4,31 @@ type Props = {
   word: string;
 };
 
-type Meaning = {
-  tag: string;
-  meaning: string;
-};
 type Definition = {
-  furigana: (string | null)[];
-  meanings: Meaning[];
+  slug: string;
+  japanese: {
+    word: string;
+    reading: string;
+  }[];
+  senses: {
+    parts_of_speech: string[];
+    english_definitions: string[];
+  }[];
 };
-
-const PARSER = new DOMParser();
 
 const fetchDefinition = (word: string) =>
-  fetch(`https://jisho.org/word/${word}`)
+  fetch(
+    `https://jisho.org/api/v1/search/words?keyword=${encodeURIComponent(word)}`
+  )
     .then((res) =>
       res.status === 200
-        ? res.text()
+        ? res.json()
         : Promise.reject(new Error(res.statusText))
     )
     .then((res) => {
-      let doc = PARSER.parseFromString(res, "text/html");
-      let furiganaElement = doc.getElementsByClassName(
-        "furigana"
-      )[0] as HTMLElement;
-      let meaningTagsElements = Array.from(
-        doc.getElementsByClassName("meaning-tags")
-      ) as HTMLElement[];
-      let meaningWrapperElements = Array.from(
-        doc.getElementsByClassName("meaning-wrapper")
-      ) as HTMLElement[];
-
-      let furigana = Array.from(furiganaElement.children).map(
-        (child) => child.textContent
-      );
-      let meanings = meaningWrapperElements.map((elem, index) => {
-        let meaningElement = elem.getElementsByClassName("meaning-meaning")[0];
-        let meaning = meaningElement.textContent;
-        let tag = meaningTagsElements[index].textContent;
-        if (!meaning) throw new Error("No meaning found");
-        if (!tag) throw new Error("No tag found");
-        return { tag, meaning };
-      });
-
-      return Promise.resolve<Definition>({ furigana, meanings });
+      let definition = res.data[0]; // get the first one
+      if (!definition) return Promise.reject(new Error("No definition found"));
+      return Promise.resolve<Definition>(definition);
     });
 
 // Cache used for storing the word definition data, that way you don't have to fetch the same data multiple times
@@ -54,6 +36,7 @@ const cache: Record<string, Definition> = {};
 
 export const DefinitionCard = ({ word }: Props) => {
   const [definition, setDefinition] = useState<Definition>();
+  const [readingIndex, setReadingIndex] = useState(0);
 
   useEffect(() => {
     if (cache[word]) setDefinition(cache[word]);
@@ -72,23 +55,51 @@ export const DefinitionCard = ({ word }: Props) => {
     <div className="w-full rounded-lg bg-gray-800 text-white p-4">
       {definition ? (
         <div className="flex flex-col gap-4">
-          <h1 className="flex">
-            {definition.furigana.map((furigana, index) => (
-              <div className="flex flex-col items-center" key={index}>
-                <span className="text-[10px]">{furigana}</span>
-                <span className="text-xl">{word.charAt(index)}</span>
-              </div>
-            ))}
-          </h1>
-          {definition.meanings.map(({ meaning, tag }, index) => (
-            <div key={index} className="flex gap-2">
-              <span>{index + 1}. </span>
-              <div>
-                <span className="text-gray-400 text-sm">{tag}</span>
-                <p>{meaning}</p>
-              </div>
+          <div className="flex w-full gap-4 justify-between">
+            <div>
+              <h1 className="text-[10px]">
+                {definition.japanese[readingIndex].reading}
+              </h1>
+              <h1 className="text-[20px]">
+                {definition.japanese[readingIndex].word}
+              </h1>
             </div>
-          ))}
+            <div className="flex gap-4">
+              <button
+                onClick={() => setReadingIndex((i) => Math.max(i - 1, 0))}
+                className="bg-gray-300 bg-opacity-0 hover:bg-opacity-20 rounded-lg p-2"
+              >
+                &larr;
+              </button>
+              <button
+                onClick={() =>
+                  setReadingIndex((i) =>
+                    Math.min(i + 1, definition.japanese.length - 1)
+                  )
+                }
+                className="bg-gray-300 bg-opacity-0 hover:bg-opacity-20 rounded-lg p-2"
+              >
+                &rarr;
+              </button>
+            </div>
+          </div>
+          <div className="flex gap-4 justify-between overflow-scroll max-h-[400px]">
+            {definition.senses.map(
+              ({ english_definitions, parts_of_speech }, index) => (
+                <div key={index} className="flex gap-2">
+                  <h2 className="text-lg font-bold">{index + 1}.</h2>
+                  <div>
+                    <h2 className="text-lg font-bold">
+                      {english_definitions.join("; ")}
+                    </h2>
+                    <p className="text-sm text-gray-500">
+                      {parts_of_speech.join(". ")}
+                    </p>
+                  </div>
+                </div>
+              )
+            )}
+          </div>
         </div>
       ) : (
         <p className="text-center text-2xl text-gray-400">Loading...</p>

@@ -7,13 +7,9 @@ type Props = {
 
 export const MouseMask = ({ greeting, greetingJp }: Props) => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [visible, setVisible] = useState(false);
   const [greetingRect, setGreetingRect] = useState(new DOMRect());
   const [greetingElem, setGreetingElem] = useState<HTMLDivElement | null>(null);
-  const visible =
-    mousePos.x >= greetingRect.left &&
-    mousePos.x <= greetingRect.right &&
-    mousePos.y >= greetingRect.top &&
-    mousePos.y <= greetingRect.bottom;
 
   useEffect(() => {
     if (!greetingElem) return;
@@ -26,11 +22,27 @@ export const MouseMask = ({ greeting, greetingJp }: Props) => {
     return () => observer.disconnect();
   }, [greetingElem]);
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    let mouseX = e.clientX;
+    let mouseY = e.clientY;
+    if (
+      mouseX > greetingRect.left &&
+      mouseX < greetingRect.right &&
+      mouseY > greetingRect.top &&
+      mouseY < greetingRect.bottom
+    ) {
+      setMousePos({ x: mouseX, y: mouseY });
+      setVisible(true);
+    } else {
+      setVisible(false);
+    }
+  };
+
   return (
     <>
       <div
-        className="relative text-6xl font-bold text-center w-full h-[400px] flex flex-col items-center justify-center"
-        onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
+        className="relative text-6xl font-bold text-center w-full h-[400px] m-[100px] flex flex-col items-center justify-center"
+        onMouseMove={handleMouseMove}
       >
         <div
           className="fixed top-0 left-0 w-[200px] h-[200px] transition-[width,height,opacity] border-2 rounded-full overflow-hidden bg-black"
