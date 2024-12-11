@@ -16,39 +16,22 @@ type Definition = {
   }[];
 };
 
-const fetchDefinition = (word: string) =>
-  fetch(
-    `https://jisho.org/api/v1/search/words?keyword=${encodeURIComponent(word)}`
-  )
-    .then((res) =>
-      res.status === 200
-        ? res.json()
-        : Promise.reject(new Error(res.statusText))
-    )
-    .then((res) => {
-      let definition = res.data[0]; // get the first one
-      if (!definition) return Promise.reject(new Error("No definition found"));
-      return Promise.resolve<Definition>(definition);
-    });
-
-// Cache used for storing the word definition data, that way you don't have to fetch the same data multiple times
-const cache: Record<string, Definition> = {};
-
 export const DefinitionCard = ({ word }: Props) => {
   const [definition, setDefinition] = useState<Definition>();
   const [readingIndex, setReadingIndex] = useState(0);
 
   useEffect(() => {
-    if (cache[word]) setDefinition(cache[word]);
-    else {
-      setDefinition(undefined);
-      fetchDefinition(word)
-        .then((def) => {
-          cache[word] = def;
-          setDefinition(def);
-        })
-        .catch(console.error);
-    }
+    setDefinition(undefined);
+    fetch(`/api/jisho?word=${encodeURIComponent(word)}`)
+      .then((res) =>
+        res.status === 200
+          ? res.json()
+          : Promise.reject(new Error(res.statusText))
+      )
+      .then((def) => {
+        setDefinition(def);
+      })
+      .catch(console.error);
   }, [word]);
 
   return (

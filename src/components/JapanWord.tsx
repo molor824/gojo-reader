@@ -1,17 +1,6 @@
 import { useMemo } from "react";
 import { DefinitionCard } from "./DefinitionCard";
 
-const SHORTCUTS: Record<string, string> = {
-  する: "為る",
-  この: "此の",
-  これ: "此れ",
-  その: "其の",
-  それ: "其れ",
-  あの: "彼の",
-  あれ: "彼",
-  どちら: "何方",
-};
-
 type Props = {
   word: string;
   showDefinition: boolean;
@@ -33,11 +22,6 @@ export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
     let splitWord = word.split("/");
     if (splitWord.length > 1) {
       [renderWord, searchWord] = splitWord;
-      if (searchWord.startsWith("!")) {
-        searchWord = searchWord.slice(1);
-      } else {
-        searchWord = SHORTCUTS[searchWord] ?? searchWord;
-      }
     }
     return { definable, renderWord, searchWord };
   }, [word]);
