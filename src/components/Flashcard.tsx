@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { speak } from "../utils/speech";
+
 interface KanjiProps {
   furigana?: string;
   word: string;
@@ -20,7 +23,12 @@ export const KanjiFlashcard = ({
       <p className={`text-lg ${reveal ? "" : "text-transparent"}`}>
         {furigana}
       </p>
-      <h2 className="text-3xl font-semibold">{word}</h2>
+      <div className="hover:text-blue-300 hover:cursor-pointer">
+        <h2 className={`text-3xl font-semibold `} onClick={() => speak(word)}>
+          🔊{word}
+        </h2>
+      </div>
+
       <h2 className={`text-xl ${reveal ? "" : "text-transparent"}`}>
         {answer}
       </h2>
