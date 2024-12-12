@@ -14,7 +14,7 @@ export const KanjiFlashcard = ({
 }: KanjiProps) => {
   return (
     <div
-      className="bg-gray-200 text-black rounded-xl p-8 justify-center items-center text-center flex flex-col"
+      className="bg-gray-200   text-black rounded-xl p-8 justify-center items-center text-center flex flex-col"
       onClick={onClick}
     >
       <p className={`text-lg ${reveal ? "" : "text-transparent"}`}>

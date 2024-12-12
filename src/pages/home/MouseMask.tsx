@@ -52,7 +52,7 @@ export const MouseMask = ({ greeting, greetingJp }: Props) => {
           }}
         >
           <h1
-            className="absolute top-0 left-0 text-center text-6xl font-bold"
+            className="absolute top-0 left-0 text-center text-8xl font-bold"
             style={{
               width: greetingRect.width,
               height: greetingRect.height,

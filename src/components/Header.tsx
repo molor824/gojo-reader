@@ -20,7 +20,7 @@ export const Header = () => {
   return (
     <header className="sticky w-full top-0 z-50 px-6 py-4 bg-black/50 backdrop-blur-sm">
       <nav className="flex justify-between items-center container mx-auto">
-        <Link to="/" className="text-2xl font-bold">
+        <Link to="/" className="text-3xl font-bold">
           Gojo-Reader
         </Link>
 
@@ -31,7 +31,7 @@ export const Header = () => {
               to={link}
               className={`${
                 location.pathname === link ? "font-bold" : ""
-              } text-gray-200 hover:bg-white/20 p-2 px-4`}
+              } text-gray-200 text-2xl hover:bg-white/20 p-2 px-4`}
             >
               {title}
             </Link>
@@ -39,7 +39,7 @@ export const Header = () => {
 
           <SignedOut>
             <SignInButton>
-              <button className=" border  rounded-2xl p-2 text-gray-200 hover:bg-white/20  px-4">
+              <button className=" border text-2xl rounded-2xl p-2 text-gray-200 hover:bg-white/20  px-4">
                 Нэвтрэх
               </button>
             </SignInButton>
