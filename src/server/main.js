@@ -1,6 +1,6 @@
 import express from "express";
 import ViteExpress from "vite-express";
-import jishoHandler from "../../api/jisho";
+import jishoHandler from "../../api/jisho.js";
 
 const app = express();
 
