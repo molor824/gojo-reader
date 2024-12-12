@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import readings from './readings.json';
+import readings from '../../readings.json';
 
 const Reader = () => {
   const location = useLocation();
@@ -8,8 +8,8 @@ const Reader = () => {
   const [readingText, setReadingText] = useState('');
 
   useEffect(() => {
-    if (readings.readings[level]) {
-      setReadingText(readings.readings[level].text);
+    if ((readings as any)[level]) {
+      setReadingText((readings as any)[level].text);
     } else {
       setReadingText('Reading not found.');
     }
