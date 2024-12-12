@@ -14,7 +14,8 @@ export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
     }
     let definable = true;
     let renderWord = word;
-    let searchWord = word;
+    let searchWord = word.replaceAll(/[、。「」【】？！,.?!]/g, "");
+    if (!searchWord) definable = false;
     if (word.startsWith(";")) {
       definable = false;
       renderWord = word.slice(1);
