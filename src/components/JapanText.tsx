@@ -14,13 +14,15 @@ export const JapanText = ({ text }: Props) => {
   const words = useMemo(() => text.split(" "), [text]);
 
   return (
-    <div>
+    <div className="w-full">
       {words.map((word, index) => (
         <JapanWord
           word={word}
           key={index}
           showDefinition={index === selectedWord}
-          onClick={() => setSelectedWord(index)}
+          onClick={() =>
+            setSelectedWord(index === selectedWord ? undefined : index)
+          }
         />
       ))}
     </div>

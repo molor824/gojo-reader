@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import readings from "../../readings.json";
+import { JapanText } from "../../components/JapanText";
 
 const Reader = () => {
   const location = useLocation();
@@ -16,11 +17,9 @@ const Reader = () => {
   }, [level]);
 
   return (
-    <div className="container flex flex-col items-center p-8">
-      <h1 className="text-4xl font-bold mb-[-30px]">
-        Reader Page - Level: {level}
-      </h1>
-      <p className="mt-16 text-2xl leading-[70px]">{readingText}</p>
+    <div className="container flex flex-col gap-4 items-center p-8">
+      <h1 className="text-4xl font-bold">Reader Page - Level: {level}</h1>
+      <JapanText text={readingText} />
     </div>
   );
 };

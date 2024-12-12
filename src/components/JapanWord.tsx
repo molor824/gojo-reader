@@ -36,7 +36,7 @@ export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
     >
       {renderWord}
       {definable && showDefinition && (
-        <div className="absolute top-full left-0 w-[400px] max-w-[calc(100vw-2rem)]">
+        <div className="absolute top-full z-10 left-0 w-[400px] max-w-[calc(100vw-2rem)]">
           <DefinitionCard word={searchWord} />
         </div>
       )}
