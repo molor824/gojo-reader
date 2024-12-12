@@ -74,7 +74,7 @@ export const DefinitionCard = ({ word }: Props) => {
               </button>
             </div>
           </div>
-          <div className="flex gap-4 justify-between overflow-scroll max-h-[400px]">
+          <div className="flex flex-col gap-4 justify-between overflow-y-scroll max-h-[400px]">
             {definition.senses.map(
               ({ english_definitions, parts_of_speech }, index) => (
                 <div key={index} className="flex gap-2">
