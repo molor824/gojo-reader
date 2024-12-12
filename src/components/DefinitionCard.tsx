@@ -28,7 +28,7 @@ export const DefinitionCard = ({ word }: Props) => {
     if (word in wordCache) {
       setDefinition(wordCache[word]);
     } else {
-      fetch(`/api/jisho?word=${encodeURIComponent(word)}`)
+      fetch(`/jisho?word=${encodeURIComponent(word)}`)
         .then((res) =>
           res.status === 200
             ? res.json()
