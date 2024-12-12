@@ -19,7 +19,10 @@ app.get("/jisho", (req, res) => {
           : Promise.reject(new Error(res.statusText))
         ).then((res) => res.data[0])
       )
-      .then((r) => res.status(200).json(r))
+      .then((r) => {
+        cache[word] = r;
+        res.status(200).json(r);
+      })
       .catch(() => res.sendStatus(500));
 });
 
