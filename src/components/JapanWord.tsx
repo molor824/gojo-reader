@@ -4,7 +4,7 @@ import { DefinitionCard } from "./DefinitionCard";
 type Props = {
   word: string;
   showDefinition: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 };
 
 export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
@@ -32,7 +32,7 @@ export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
       className={`${
         showDefinition && definable ? "font-bold" : ""
       } hover:underline relative`}
-      onClick={() => definable && onClick?.()}
+      onClick={(e) => definable && onClick?.(e)}
     >
       {renderWord}
       {definable && showDefinition && (

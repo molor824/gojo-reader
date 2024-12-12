@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { speak } from "../speech/speech";
 
 type Props = {
   word: string;
@@ -51,7 +52,10 @@ export const DefinitionCard = ({ word }: Props) => {
               <h1 className="text-[10px]">
                 {definition.japanese[readingIndex].reading}
               </h1>
-              <h1 className="text-[20px]">
+              <h1
+                className={`text-[20px]`}
+                onClick={() => speak(definition.japanese[readingIndex].word)}
+              >
                 {definition.japanese[readingIndex].word}
               </h1>
             </div>
