@@ -16,22 +16,30 @@ type Definition = {
   }[];
 };
 
+const wordCache: Record<string, Definition> = {};
+
 export const DefinitionCard = ({ word }: Props) => {
-  const [definition, setDefinition] = useState<Definition>();
+  const [definition, setDefinition] = useState<Definition | undefined>(
+    wordCache[word]
+  );
   const [readingIndex, setReadingIndex] = useState(0);
 
   useEffect(() => {
-    setDefinition(undefined);
-    fetch(`/api/jisho?word=${encodeURIComponent(word)}`)
-      .then((res) =>
-        res.status === 200
-          ? res.json()
-          : Promise.reject(new Error(res.statusText))
-      )
-      .then((def) => {
-        setDefinition(def);
-      })
-      .catch(console.error);
+    if (word in wordCache) {
+      setDefinition(wordCache[word]);
+    } else {
+      fetch(`/api/jisho?word=${encodeURIComponent(word)}`)
+        .then((res) =>
+          res.status === 200
+            ? res.json()
+            : Promise.reject(new Error(res.statusText))
+        )
+        .then((def) => {
+          wordCache[word] = def;
+          setDefinition(def);
+        })
+        .catch(console.error);
+    }
   }, [word]);
 
   return (
