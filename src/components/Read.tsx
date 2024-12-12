@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const Read = () => {
   return (
-    <div className="flex flex-col items-start h-full w-full bg-black">
-      <div className="relative flex flex-col items-start justify-start w-full mx-auto">
+    <div className="flex flex-col items-start h-[875px] h-full w-full bg-black ">
+      <div className="relative flex flex-col items-start mt-[180px] justify-start w-full mx-auto">
         <h1 className="text-4xl font-bold text-white mb-4 mx-auto">
           Japanese Readings
         </h1>

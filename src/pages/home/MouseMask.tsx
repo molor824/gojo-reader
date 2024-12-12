@@ -41,7 +41,7 @@ export const MouseMask = ({ greeting, greetingJp }: Props) => {
   return (
     <>
       <div
-        className="relative text-8xl font-bold text-center w-full h-[400px] m-[100px] flex flex-col items-center justify-center"
+        className="relative text-8xl font-bold text-center w-full h-[500px] m-[100px] flex flex-col items-center justify-center"
         onMouseMove={handleMouseMove}
       >
         <div

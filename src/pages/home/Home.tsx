@@ -5,7 +5,7 @@ const GREETING_JP = "ゴジョーリーダーへようこそ！";
 
 export const Home = () => {
   return (
-    <section className="container flex flex-col items-center p-8">
+    <section className="container flex h-[875px] flex-col items-center p-8">
       <MouseMask greeting={GREETING} greetingJp={GREETING_JP} />
     </section>
   );

@@ -18,7 +18,7 @@ const Reader = () => {
 
   return (
     <div className="container flex flex-col gap-4 items-center p-8">
-      <h1 className="text-4xl font-bold">Reader Page - Level: {level}</h1>
+      <h1 className="text-4xl font-bold mt-[120px] mb-10">Reader Page - Level: {level}</h1>
       <JapanText text={readingText} />
     </div>
   );
