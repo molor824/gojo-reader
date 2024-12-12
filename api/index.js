@@ -12,8 +12,7 @@ const PORT = 3000;
 const app = express();
 const cache = {};
 
-app.use(express.static(distPath));
-app.get("/jisho", (req, res) => {
+app.get("/api/jisho", (req, res) => {
   const word = req.query.word;
 
   console.log(word);
@@ -32,8 +31,6 @@ app.get("/jisho", (req, res) => {
       })
       .catch(() => res.sendStatus(500));
 });
-
-app.get("*", (req, res) => res.sendFile(path.join(distPath, "index.html")));
 
 ViteExpress.listen(app, PORT, () =>
   console.log(`Server listening at http://localhost:${PORT}`)
