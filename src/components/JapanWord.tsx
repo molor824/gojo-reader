@@ -30,7 +30,7 @@ export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
     <span
       className={`${
         showDefinition && definable ? "font-bold" : ""
-      } hover:underline`}
+      } hover:underline relative`}
       onClick={() => definable && onClick?.()}
     >
       {renderWord}
