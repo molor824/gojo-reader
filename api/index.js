@@ -1,11 +1,18 @@
 import express from "express";
 import ViteExpress from "vite-express";
+import { fileURLToPath } from "url";
+import path from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const distPath = path.join(__dirname, "../dist");
 
 const PORT = 3000;
 
 const app = express();
 const cache = {};
 
+app.use(express.static(distPath));
 app.get("/jisho", (req, res) => {
   const word = req.query.word;
 
@@ -25,6 +32,8 @@ app.get("/jisho", (req, res) => {
       })
       .catch(() => res.sendStatus(500));
 });
+
+app.get("*", (req, res) => res.sendFile(path.join(distPath, "index.html")));
 
 ViteExpress.listen(app, PORT, () =>
   console.log(`Server listening at http://localhost:${PORT}`)
