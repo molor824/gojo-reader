@@ -1,45 +1,31 @@
-import { useMemo } from "react";
-import { DefinitionCard } from "./DefinitionCard";
+import { useMemo, useState } from "react";
+import { JapanWord } from "./JapanWord";
 
 type Props = {
-  word: string;
-  showDefinition: boolean;
-  onClick?: (e: React.MouseEvent) => void;
+  text: string;
 };
 
-export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
-  const { definable, renderWord, searchWord } = useMemo(() => {
-    if (!word) {
-      return { definable: false, renderWord: " ", searchWord: "" };
-    }
-    let definable = true;
-    let renderWord = word;
-    let searchWord = word.replaceAll(/[、。「」【】？！,.?!]/g, "");
-    if (!searchWord) definable = false;
-    if (word.startsWith(";")) {
-      definable = false;
-      renderWord = word.slice(1);
-    }
-    let splitWord = word.split("/");
-    if (splitWord.length > 1) {
-      [renderWord, searchWord] = splitWord;
-    }
-    return { definable, renderWord, searchWord };
-  }, [word]);
+/**
+ * Japanese text component where each word can be selected and definition is shown.
+ * @param text Text to render. Spaces will be treated as a word seperator without being rendered. Double space will be rendered as a single space.
+ */
+export const JapanText = ({ text }: Props) => {
+  const [selectedWord, setSelectedWord] = useState<number>();
+  const words = useMemo(() => text.split(" "), [text]);
 
   return (
-    <span
-      className={`${
-        showDefinition && definable ? "font-bold" : ""
-      } hover:underline relative`}
-      onClick={(e) => definable && onClick?.(e)}
-    >
-      {renderWord}
-      {definable && showDefinition && (
-        <div className="absolute top-full z-10 left-0 w-[400px] max-w-[calc(100vw-2rem)]">
-          <DefinitionCard word={searchWord} />
-        </div>
-      )}
-    </span>
+    <div className="w-full">
+      {words.map((word, index) => (
+        <JapanWord
+          word={word}
+          key={index}
+          showDefinition={index === selectedWord}
+          onClick={(e) =>
+            e.target === e.currentTarget &&
+            setSelectedWord(index === selectedWord ? undefined : index)
+          }
+        />
+      ))}
+    </div>
   );
 };
