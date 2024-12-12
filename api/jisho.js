@@ -1,12 +1,6 @@
-import express from "express";
-import ViteExpress from "vite-express";
-
-const PORT = 3000;
-
-const app = express();
 const cache = {};
 
-app.get("/jisho", (req, res) => {
+export default function handler(req, res) {
   const word = req.query.word;
 
   console.log(word);
@@ -24,8 +18,4 @@ app.get("/jisho", (req, res) => {
         res.status(200).json(r);
       })
       .catch(() => res.sendStatus(500));
-});
-
-ViteExpress.listen(app, PORT, () =>
-  console.log(`Server listening at http://localhost:${PORT}`)
-);
+}
