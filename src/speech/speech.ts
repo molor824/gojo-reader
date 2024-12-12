@@ -4,7 +4,7 @@ export function speak(str: string) {
 
   // Select a voice
   const voices = speechSynthesis.getVoices();
-  utterance.voice = voices[2]; // Choose a specific voice
+  utterance.voice = voices[17]; // Choose a specific voice
 
   // Speak the text
   speechSynthesis.speak(utterance);
