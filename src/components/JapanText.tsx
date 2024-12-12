@@ -20,7 +20,9 @@ export const JapanText = ({ text }: Props) => {
           word={word}
           key={index}
           showDefinition={index === selectedWord}
-          onClick={() => setSelectedWord(index)}
+          onClick={() =>
+            setSelectedWord(index === selectedWord ? undefined : index)
+          }
         />
       ))}
     </div>
