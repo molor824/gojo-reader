@@ -1,38 +1,65 @@
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+} from "@clerk/clerk-react";
+
+const NAVBAR_ITEMS = [
+  { title: "Home", link: "/" },
+  { title: "Read", link: "/read" },
+  { title: "Review", link: "/review" },
+  { title: "About Us", link: "/about" },
+];
+
 export const Header = () => {
+  const location = useLocation();
+  const [extend, setExtend] = useState(false);
   return (
-    <header className="fixed w-full top-0 z-50 px-6 py-4 bg-black/80 backdrop-blur-sm">
-      <nav className="flex justify-between items-center max-w-7xl mx-auto">
-        <div className="text-2xl font-bold">monopo</div>
+    <header className="sticky w-full top-0 z-50 px-6 py-4 bg-black/50 backdrop-blur-sm">
+      <nav className="flex justify-between items-center container mx-auto">
+        <Link to="/" className="text-3xl font-bold">
+          Gojo-Reader
+        </Link>
 
-        <div className="hidden md:flex space-x-8">
-          <a href="#home" className="hover:text-gray-400 transition-colors">
-            Home
-          </a>
-          <a href="#work" className="hover:text-gray-400 transition-colors">
-            Work
-          </a>
-          <a href="#services" className="hover:text-gray-400 transition-colors">
-            Services
-          </a>
-          <a href="#team" className="hover:text-gray-400 transition-colors">
-            Team
-          </a>
-          <a href="#contact" className="hover:text-gray-400 transition-colors">
-            Contact
-          </a>
-          <a href="#press" className="hover:text-gray-400 transition-colors">
-            Press & News
-          </a>
-        </div>
+        <div className="hidden md:flex items-stretch">
+          {NAVBAR_ITEMS.map(({ title, link }, index) => (
+            <Link
+              key={index}
+              to={link}
+              className={`${
+                location.pathname === link ? "font-bold" : ""
+              } text-gray-200 text-2xl hover:bg-white/20 p-2 px-4`}
+            >
+              {title}
+            </Link>
+          ))}
 
-        <div className="hidden md:flex space-x-4 text-sm">
-          <span>05:28 PM</span>
-          <span>01:28 AM</span>
-          <span>12:28 PM</span>
+          <SignedOut>
+            <SignInButton>
+              <button className=" border text-2xl rounded-2xl p-2 text-gray-200 hover:bg-white/20  px-4">
+                Нэвтрэх
+              </button>
+            </SignInButton>
+          </SignedOut>
+
+          <SignedIn>
+            <UserButton 
+              showName
+              appearance={{
+                elements: {
+                  userButtonAvatarBox: "border-2 border-white",
+                  userButtonTrigger: "text-white hover:opacity-75"
+                }
+              }}
+            />
+          </SignedIn>
         </div>
 
         {/* Mobile menu button */}
-        <button className="md:hidden">
+        <button className="md:hidden p-2" onClick={() => setExtend((e) => !e)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"
@@ -49,6 +76,45 @@ export const Header = () => {
           </svg>
         </button>
       </nav>
+      {extend && (
+        <>
+          <div
+            className="fixed top-0 left-0 w-screen h-screen"
+            onClick={() => setExtend(false)}
+          ></div>
+          <div className="absolute top-full right-4 bg-black/50 backdrop-blur-sm text-right min-w-[100px] flex flex-col items-stretch">
+            {NAVBAR_ITEMS.map(({ title, link }, index) => (
+              <Link
+                key={index}
+                to={link}
+                className={`hover:bg-white/20 p-2 ${
+                  location.pathname === link ? "font-bold" : ""
+                }`}
+              >
+                {title}
+              </Link>
+            ))}
+            <li className="mx-4 my-6 md:my-0 border-white hover:border-gray-200 border-4 rounded-xl duration-500">
+              <SignedOut>
+                <SignInButton>Нэвтрэх</SignInButton>
+              </SignedOut>
+             
+
+              <SignedIn>
+                <UserButton 
+                  showName
+                  appearance={{
+                    elements: {
+                      userButtonAvatarBox: "border-2 border-white",
+                      userButtonTrigger: "text-white hover:opacity-75"
+                    }
+                  }}
+                />
+              </SignedIn>
+            </li>
+          </div>
+        </>
+      )}
     </header>
   );
 };
