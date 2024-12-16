@@ -14,7 +14,7 @@ export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
     }
     let definable = true;
     let renderWord = word;
-    let searchWord = word.replaceAll(/[、。「」【】？！,.?!]/g, "");
+    let searchWord = word;
     if (!searchWord) definable = false;
     if (word.startsWith(";")) {
       definable = false;
@@ -24,6 +24,7 @@ export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
     if (splitWord.length > 1) {
       [renderWord, searchWord] = splitWord;
     }
+    searchWord = searchWord.replaceAll(/[、。「」【】？！,.?! ]/g, "");
     return { definable, renderWord, searchWord };
   }, [word]);
   const handleCardElementRef = (ref: HTMLDivElement | null) => {
