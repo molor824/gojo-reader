@@ -42,9 +42,24 @@ export const DefinitionCard = ({ word }: Props) => {
         .catch(console.error);
     }
   }, [word]);
+  const handleCardElementRef = (ref: HTMLDivElement | null) => {
+    if (!ref) return;
+
+    const windowRect = document.body.getBoundingClientRect();
+    const rect = ref.getBoundingClientRect();
+    let offset = 0;
+    if (rect.left < windowRect.left) offset = windowRect.left - rect.left;
+    else if (rect.right > windowRect.right)
+      offset = windowRect.right - rect.right;
+
+    ref.style.transform = `translate(${offset}px, 0)`;
+  };
 
   return (
-    <div className="w-full rounded-lg bg-gray-800 text-white p-4">
+    <div
+      className="w-full rounded-lg bg-gray-800 text-white p-4"
+      ref={handleCardElementRef}
+    >
       {definition ? (
         <div className="flex flex-col gap-4">
           <div className="flex w-full gap-4 justify-between">
