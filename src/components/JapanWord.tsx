@@ -24,7 +24,7 @@ export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
     if (splitWord.length > 1) {
       [renderWord, searchWord] = splitWord;
     }
-    searchWord = searchWord.replaceAll(/[、。「」【】？！,.?! ]/g, "");
+    searchWord = searchWord.replaceAll(/[、。：「」【】？！,.?! ]/g, "");
     return { definable, renderWord, searchWord };
   }, [word]);
   const handleCardElementRef = (ref: HTMLDivElement | null) => {
