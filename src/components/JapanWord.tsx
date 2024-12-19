@@ -14,7 +14,7 @@ export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
     }
     let definable = true;
     let renderWord = word;
-    let searchWord = word.replaceAll(/[、。「」：【】？！,.?!]/g, "");
+    let searchWord = word;
     if (!searchWord) definable = false;
     if (word.startsWith(";")) {
       definable = false;
@@ -24,8 +24,21 @@ export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
     if (splitWord.length > 1) {
       [renderWord, searchWord] = splitWord;
     }
+    searchWord = searchWord.replaceAll(/[、。：「」【】？！,.?! ]/g, "");
     return { definable, renderWord, searchWord };
   }, [word]);
+  const handleCardElementRef = (ref: HTMLDivElement | null) => {
+    if (!ref) return;
+
+    const windowRect = document.body.getBoundingClientRect();
+    const rect = ref.getBoundingClientRect();
+    let offset = 0;
+    if (rect.left < windowRect.left) offset = windowRect.left - rect.left;
+    else if (rect.right > windowRect.right)
+      offset = windowRect.right - rect.right;
+
+    ref.style.transform = `translate(${offset}px, 0)`;
+  };
 
   return (
     <span
@@ -36,7 +49,10 @@ export const JapanWord = ({ word, showDefinition, onClick }: Props) => {
     >
       {renderWord}
       {definable && showDefinition && (
-        <div className="absolute top-full z-10 left-0 w-[400px] max-w-[calc(100vw-2rem)]">
+        <div
+          className="absolute top-full z-10 left-0 w-[400px] max-w-[calc(100vw-2rem)]"
+          ref={handleCardElementRef}
+        >
           <DefinitionCard word={searchWord} />
         </div>
       )}

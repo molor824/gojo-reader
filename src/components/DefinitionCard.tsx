@@ -62,7 +62,9 @@ export const DefinitionCard = ({ word }: Props) => {
             <div className="flex gap-4">
               <button
                 onClick={() => setReadingIndex((i) => Math.max(i - 1, 0))}
-                className="bg-gray-300 bg-opacity-0 hover:bg-opacity-20 rounded-lg p-2"
+                className={`bg-gray-300 bg-opacity-0 hover:bg-opacity-20 rounded-lg p-2 ${
+                  readingIndex === 0 ? "text-gray-500" : ""
+                }`}
               >
                 &larr;
               </button>
@@ -72,13 +74,17 @@ export const DefinitionCard = ({ word }: Props) => {
                     Math.min(i + 1, definition.japanese.length - 1)
                   )
                 }
-                className="bg-gray-300 bg-opacity-0 hover:bg-opacity-20 rounded-lg p-2"
+                className={`bg-gray-300 bg-opacity-0 hover:bg-opacity-20 rounded-lg p-2 ${
+                  readingIndex === definition.japanese.length - 1
+                    ? "text-gray-500"
+                    : ""
+                }`}
               >
                 &rarr;
               </button>
             </div>
           </div>
-          <div className="flex flex-col gap-4 justify-between overflow-y-scroll max-h-[400px]">
+          <div className="flex flex-col gap-4 justify-between overflow-y-scroll max-h-[300px]">
             {definition.senses.map(
               ({ english_definitions, parts_of_speech }, index) => (
                 <div key={index} className="flex gap-2">
