@@ -1,20 +1,23 @@
 import { useState } from "react";
+import { useDefinitionHook } from "../../hooks/useDefinitionHook";
 import { KanjiFlashcard } from "../../components/Flashcard";
-
-const FLASH_CARDS = [
-  {
-    word: "感じる",
-    furigana: "かんじる",
-    answer: "To feel",
-  },
-  {
-    word: "我慢",
-    furigana: "がまん",
-    answer: "Patience",
-  },
-];
+import { useUser } from "@clerk/clerk-react";
 
 export const Review = () => {
+  const { user } = useUser();
+  const [readingIndex, setReadingIndex] = useState(0);
+
+  if (!user || !user.unsafeMetadata || !user.unsafeMetadata.words) {
+    return <div>Loading...</div>;
+  }
+
+  console.log(Object.keys(user.unsafeMetadata.words));
+
+  const word = Object.keys(user.unsafeMetadata.words)[readingIndex];
+  console.log(word);
+  const definition = useDefinitionHook(word);
+  console.log(definition);
+
   const [reveal, setReveal] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
 
@@ -24,7 +27,9 @@ export const Review = () => {
         <KanjiFlashcard
           reveal={reveal}
           onClick={() => setReveal(true)}
-          {...FLASH_CARDS[currentCard]}
+          word={word}
+          furigana={definition?.japanese[0].reading}
+          answer={definition?.senses[0].english_definitions[0]!}
         />
       </div>
       {reveal && (
@@ -32,6 +37,7 @@ export const Review = () => {
           onClick={() => {
             setReveal(false);
             setCurrentCard((c) => c + 1);
+            setReadingIndex((c) => c + 1);
           }}
         >
           Next

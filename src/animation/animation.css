@@ -1,0 +1,10 @@
+@keyframes pixelAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  .pixel-animation {
+    animation: pixelAnimation 0.3s ease-in-out;
+    background-color: rgba(255, 0, 0, 0.5); /* Temporary for debugging */
+  }
