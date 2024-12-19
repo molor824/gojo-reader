@@ -46,13 +46,13 @@ export const Header = () => {
           </SignedOut>
 
           <SignedIn>
-            <UserButton 
+            <UserButton
               showName
               appearance={{
                 elements: {
                   userButtonAvatarBox: "border-2 border-white",
-                  userButtonTrigger: "text-white hover:opacity-75"
-                }
+                  userButtonTrigger: "text-white hover:opacity-75",
+                },
               }}
             />
           </SignedIn>
@@ -94,24 +94,29 @@ export const Header = () => {
                 {title}
               </Link>
             ))}
-            <li className="mx-4 my-6 md:my-0 border-white hover:border-gray-200 border-4 rounded-xl duration-500">
-              <SignedOut>
-                <SignInButton>Нэвтрэх</SignInButton>
-              </SignedOut>
-             
-
-              <SignedIn>
-                <UserButton 
+            <SignedOut>
+              <div className="m-1">
+                <SignInButton>
+                  <button className="hover:bg-white/20 w-full p-1 rounded-lg border-white border-[1px]">
+                    Нэвтрэх
+                  </button>
+                </SignInButton>
+              </div>
+            </SignedOut>
+            <SignedIn>
+              <div className="hover:bg-white/20">
+                <UserButton
                   showName
                   appearance={{
                     elements: {
-                      userButtonAvatarBox: "border-2 border-white",
-                      userButtonTrigger: "text-white hover:opacity-75"
-                    }
+                      userButtonAvatarBox: "border-[2px] border-white",
+                      userButtonTrigger: "text-white hover:opacity-75",
+                      userButtonBox: "p-2",
+                    },
                   }}
                 />
-              </SignedIn>
-            </li>
+              </div>
+            </SignedIn>
           </div>
         </>
       )}

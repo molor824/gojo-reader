@@ -7,10 +7,8 @@ import { Error } from "./pages/error/Error";
 import { Review } from "./pages/review/Review";
 import "./index.css";
 import { ClerkProvider } from "@clerk/clerk-react";
-import Read from "./components/Read";
+import Read from "./pages/read/Read";
 import Reader from "./pages/reader/Reader";
-
-
 
 const router = createBrowserRouter([
   {
@@ -32,7 +30,7 @@ if (!PUBLISHABLE_KEY) {
 }
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <StrictMode>
-     <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
+    <ClerkProvider publishableKey={PUBLISHABLE_KEY}>
       <RouterProvider router={router} />
     </ClerkProvider>
   </StrictMode>
