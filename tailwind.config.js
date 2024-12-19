@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
@@ -14,6 +14,16 @@ export default {
       },
       backfaceVisibility: {
         hidden: "hidden",
+      },
+      animation: {
+        pop: 'pop 0.5s ease forwards',
+      },
+      keyframes: {
+        pop: {
+          '0%': { transform: 'translateY(100%) scale(0)', opacity: '1' },
+          '50%': { transform: 'translateY(-50%) scale(1)', opacity: '1' },
+          '100%': { transform: 'translateY(-100%) scale(0)', opacity: '0' },
+        },
       },
     },
   },

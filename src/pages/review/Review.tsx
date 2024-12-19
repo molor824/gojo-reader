@@ -3,6 +3,9 @@ import { useDefinitionHook } from "../../hooks/useDefinitionHook";
 import { KanjiFlashcard } from "../../components/Flashcard";
 import { useUser } from "@clerk/clerk-react";
 
+import NeonCubes from "../../components/NeonCubes";
+
+
 export const Review = () => {
   const { user } = useUser();
   const [readingIndex, setReadingIndex] = useState(0);
@@ -23,7 +26,9 @@ export const Review = () => {
 
   return (
     <section className="container flex flex-col items-center gap-8 p-8">
+      <NeonCubes />
       <div className="max-w-64 w-full">
+        
         <KanjiFlashcard
           reveal={reveal}
           onClick={() => setReveal(true)}
