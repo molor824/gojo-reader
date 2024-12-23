@@ -1,69 +1,106 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { KanjiFlashcard } from "../../components/Flashcard";
 import { useUser } from "@clerk/clerk-react";
 
 import NeonCubes from "../../components/NeonCubes";
 import { UserData } from "../../types/UserDataType";
-
-const MEMO_COLORS = ["red", "orange", "yellow", "green", "blue"];
+import { ReviewRating } from "../../components/ReviewRating";
 
 export const Review = () => {
-  const { user } = useUser();
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
+  const { user, isLoaded } = useUser();
   const [reveal, setReveal] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
+  const [rating, setRating] = useState(0);
+  const [words, setWords] = useState<string[]>([]);
+  const currentWord = words[currentCard];
 
-  const metadata = user.unsafeMetadata as UserData;
+  const metadata = user?.unsafeMetadata as UserData;
 
-  const words = useMemo(
-    () =>
-      Object.entries(metadata.words).sort(
-        (a, b) => b[1].memorizationRate - a[1].memorizationRate
-      ),
-    []
-  );
-  const [currentWord, currentMemo] = words[currentCard];
-  const handleMemorizationRate = (rate: number) => {
-    if (currentMemo.memorizationRate >= 4 && rate >= 4)
-      delete metadata.words[currentWord];
+  const sortWords = () => {
+    if (!metadata.words) return;
+
+    const sortedWords = Object.entries(metadata.words).sort(
+      (a, b) => a[1].memorizationRate - b[1].memorizationRate
+    );
+    setWords(sortedWords.map(([word]) => word));
+  };
+
+  useEffect(sortWords, []);
+
+  const handleNext = (rate: number) => {
+    if (!metadata.words) return;
+
+    if (rate <= 0) delete metadata.words[currentWord];
     else metadata.words[currentWord].memorizationRate = rate;
 
     setReveal(false);
+    setRating(0);
     setCurrentCard(currentCard + 1);
-    user.update({ unsafeMetadata: metadata });
+    user!.update({ unsafeMetadata: metadata });
+  };
+  const handleReReview = () => {
+    setCurrentCard(0);
+    setReveal(false);
+    setRating(0);
+    sortWords();
   };
 
   return (
     <section className="container flex flex-col items-center gap-8 p-8">
-      <NeonCubes />
-      <h1 className="text-4xl font-bold">Review Page</h1>
-      <KanjiFlashcard
-        word={currentWord}
-        reveal={reveal}
-        onClick={() => setReveal(true)}
-      />
-      {reveal && (
-        <div className="flex flex-col items-center gap-8 p-8 text-white text-center">
-          <h1 className="text-4xl font-bold">How well did you guess?</h1>
-          <div className="flex gap-4">
-            {Array(5)
-              .fill(0)
-              .map((_, i) => (
+      {user ? (
+        <>
+          <NeonCubes />
+          <h1 className="text-4xl font-bold">Review Page</h1>
+          {currentCard < words.length ? (
+            <KanjiFlashcard
+              word={currentWord}
+              reveal={reveal}
+              onClick={() => setReveal(true)}
+            />
+          ) : words.length > 0 ? (
+            <>
+              <h2>No words left to review</h2>
+              <p>Would you like to re-review your words?</p>
+              <button
+                onClick={handleReReview}
+                className="bg-green-300 hover:bg-green-400 rounded-xl p-2"
+              >
+                Re-review
+              </button>
+            </>
+          ) : (
+            <>
+              <h2>There are no words to review in your review list</h2>
+              <p>
+                Add some words to your review list by going to the reading page
+              </p>
+            </>
+          )}
+          {reveal && (
+            <div className="flex flex-col items-center gap-8 p-8 text-white text-center">
+              <h1 className="text-4xl font-bold">How well did you guess?</h1>
+              <ReviewRating rating={rating} onRate={setRating} />
+              <button
+                onClick={() => handleNext(0)}
+                className="hover:underline text-gray-600 hover:text-gray-400"
+              >
+                Remove this word
+              </button>
+              {rating > 0 && (
                 <button
-                  key={i}
-                  onClick={() => handleMemorizationRate(i)}
-                  className="rounded-lg p-2 bg-opacity-70 hover:bg-opacity-100"
-                  style={{ backgroundColor: MEMO_COLORS[i] }}
+                  className="rounded-xl bg-blue-300 text-black p-2"
+                  onClick={() => handleNext(rating)}
                 >
-                  {i + 1}
+                  Next
                 </button>
-              ))}
-          </div>
-        </div>
+              )}
+            </div>
+          )}
+        </>
+      ) : !isLoaded ? (
+        <div>Loading...</div>
+      ) : (
+        <div>Please sign in</div>
       )}
     </section>
   );
