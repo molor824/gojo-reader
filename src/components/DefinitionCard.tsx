@@ -16,21 +16,14 @@ export const DefinitionCard = ({ word }: Props) => {
   console.log(user?.unsafeMetadata);
 
   const handleFlashcard = () => {
-    const word = definition?.japanese[readingIndex].word;
+    const word = definition?.japanese[0].word;
     if (!user) return;
+    if (!word) return;
+
     const metadata = user.unsafeMetadata as UserData;
     if (!metadata.words) metadata.words = {};
 
-    if (metadata.words[word!]) {
-      //memorization
-      if (metadata.words[word!].memorizationRate >= 5) {
-        delete metadata.words[word!];
-      } else {
-        metadata.words[word!].memorizationRate = 0;
-      }
-    } else {
-      metadata.words[word!] = { memorizationRate: 0, furigana: "", utga: "" };
-    }
+    if (metadata.words[word]) return;
 
     user
       .update({ unsafeMetadata: metadata })
@@ -52,13 +45,15 @@ export const DefinitionCard = ({ word }: Props) => {
               >
                 {definition.japanese[readingIndex].word}
               </h1>
+            </div>
+            {user && (
               <button
                 className="bg-white rounded text-black px-3 hover:bg-slate-300"
                 onClick={handleFlashcard}
               >
-                add
+                Add to reviews list
               </button>
-            </div>
+            )}
             <div className="flex gap-4">
               <button
                 onClick={() => setReadingIndex((i) => Math.max(i - 1, 0))}
