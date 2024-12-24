@@ -1,53 +1,40 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { speak } from "../speech/speech";
+import { useUser } from "@clerk/clerk-react";
+import { UserData } from "../types/UserDataType";
+import { useDefinitionHook } from "../hooks/useDefinitionHook";
 
 type Props = {
   word: string;
 };
 
-type Definition = {
-  slug: string;
-  japanese: {
-    word: string;
-    reading: string;
-  }[];
-  senses: {
-    parts_of_speech: string[];
-    english_definitions: string[];
-  }[];
-};
-
-const wordCache: Record<string, Definition> = {};
-
 export const DefinitionCard = ({ word }: Props) => {
-  const [definition, setDefinition] = useState<Definition | undefined>(
-    wordCache[word]
-  );
   const [readingIndex, setReadingIndex] = useState(0);
+  const definition = useDefinitionHook(word);
 
-  useEffect(() => {
-    if (word in wordCache) {
-      setDefinition(wordCache[word]);
-    } else {
-      fetch(`/api/jisho?word=${encodeURIComponent(word)}`)
-        .then((res) =>
-          res.status === 200
-            ? res.json()
-            : Promise.reject(new Error(res.statusText))
-        )
-        .then((def) => {
-          wordCache[word] = def;
-          setDefinition(def);
-        })
-        .catch(console.error);
-    }
-  }, [word]);
+  const { user } = useUser();
+  const metadata = user?.unsafeMetadata as UserData | undefined;
+  const added = metadata?.words?.[word];
+
+  const handleFlashcard = () => {
+    if (!user) return;
+    if (!metadata) return;
+
+    if (!metadata.words) metadata.words = {};
+    if (metadata.words[word]) return;
+
+    metadata.words[word] = { memorizationRate: 1 };
+
+    user
+      .update({ unsafeMetadata: metadata })
+      .then(() => console.log("Success"));
+  };
 
   return (
     <div className="w-full rounded-lg bg-gray-800 text-white p-4">
       {definition ? (
         <div className="flex flex-col gap-4">
-          <div className="flex w-full gap-4 justify-between">
+          <div className="flex w-full gap-4 justify-between items-center">
             <div>
               <h1 className="text-[10px]">
                 {definition.japanese[readingIndex].reading}
@@ -59,6 +46,17 @@ export const DefinitionCard = ({ word }: Props) => {
                 {definition.japanese[readingIndex].word}
               </h1>
             </div>
+            {user &&
+              (!added ? (
+                <button
+                  className="bg-white rounded text-black px-3 hover:bg-slate-300 text-sm"
+                  onClick={handleFlashcard}
+                >
+                  Add to reviews list
+                </button>
+              ) : (
+                <p className="text-sm text-gray-400">Added to list...</p>
+              ))}
             <div className="flex gap-4">
               <button
                 onClick={() => setReadingIndex((i) => Math.max(i - 1, 0))}

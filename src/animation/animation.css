@@ -1,0 +1,43 @@
+@keyframes pixelAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  .pixel-animation {
+    animation: pixelAnimation 0.3s ease-in-out;
+    background-color: rgba(255, 0, 0, 0.5); /* Temporary for debugging */
+  }
+
+  @keyframes popAnimation {
+    0% {
+        transform: translate(0, 100%) scale(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(0, -50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0, -100%) scale(0);
+        opacity: 0;
+    }
+  }
+
+  .cube {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 255, 255, 0.8); /* Neon color */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    animation: popAnimation 0.5s ease forwards;
+  }
+
+  .container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Full height for demonstration */
+    overflow: hidden; /* Hide overflow */
+  }
