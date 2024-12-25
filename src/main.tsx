@@ -9,6 +9,7 @@ import "./index.css";
 import { ClerkProvider } from "@clerk/clerk-react";
 import Read from "./pages/read/Read";
 import Reader from "./pages/reader/Reader";
+import About from "./pages/about/About";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: "/review", element: <Review /> },
       { path: "/read", element: <Read /> },
       { path: "/reader", element: <Reader /> },
+      { path: "/about", element: <About />},
     ],
   },
 ]);
