@@ -3,20 +3,16 @@ import { useDefinitionHook } from "../hooks/useDefinitionHook";
 import NeonCubes from "./NeonCubes";
 import { useState } from "react";
 
+const REVEAL_DURATION = 1000;
+const ANIMATION_START_DURATION = 500;
+const ANIMATION_IDLE_DURATION = 400;
+
 interface KanjiProps {
   word: string;
   reveal: boolean;
-  revealDuration: number;
-  minRevealDuration: number;
   onClick?: () => void;
 }
-export const KanjiFlashcard = ({
-  word,
-  revealDuration,
-  minRevealDuration,
-  reveal,
-  onClick,
-}: KanjiProps) => {
+export const KanjiFlashcard = ({ word, reveal, onClick }: KanjiProps) => {
   const definition = useDefinitionHook(word);
   const furigana = definition?.japanese[0].reading;
   const meaning = definition?.senses[0].english_definitions.join("; ");
@@ -31,8 +27,11 @@ export const KanjiFlashcard = ({
           return;
         }
         setRevealAnimation(true);
-        setTimeout(() => onClick?.(), revealDuration);
-        setTimeout(() => setRevealAnimation(false), revealDuration * 2);
+        setTimeout(() => onClick?.(), REVEAL_DURATION);
+        setTimeout(
+          () => setRevealAnimation(false),
+          REVEAL_DURATION * 2 + ANIMATION_IDLE_DURATION
+        );
       }}
     >
       <p className={`text-gray-700 text-lg ${reveal ? "" : "invisible"}`}>
@@ -49,8 +48,8 @@ export const KanjiFlashcard = ({
       </h2>
       {revealAnimation && (
         <NeonCubes
-          minDuration={minRevealDuration}
-          maxDuration={revealDuration}
+          minDuration={ANIMATION_START_DURATION}
+          maxDuration={REVEAL_DURATION}
         />
       )}
     </div>

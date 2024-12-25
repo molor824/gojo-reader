@@ -4,9 +4,6 @@ import { useUser } from "@clerk/clerk-react";
 import { UserData } from "../../types/UserDataType";
 import { ReviewRating } from "../../components/ReviewRating";
 
-const REVEAL_DURATION = 1000;
-const ANIMATION_START_DURATION = 500;
-
 export const Review = () => {
   const { user, isLoaded } = useUser();
   const [reveal, setReveal] = useState(false);
@@ -55,8 +52,6 @@ export const Review = () => {
             <KanjiFlashcard
               word={currentWord}
               reveal={reveal}
-              revealDuration={REVEAL_DURATION}
-              minRevealDuration={ANIMATION_START_DURATION}
               onClick={() => setReveal(true)}
             />
           ) : words.length > 0 ? (
