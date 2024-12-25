@@ -1,10 +1,8 @@
 export type UserData = {
-  words: Record<
+  words?: Record<
     string,
     {
       memorizationRate: number; // 0 means not memorized, 5 means memorized
-      furigana: string;
-      utga: string;
     }
   >;
 };

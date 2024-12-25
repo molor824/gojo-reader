@@ -13,24 +13,17 @@ export const DefinitionCard = ({ word }: Props) => {
   const definition = useDefinitionHook(word);
 
   const { user } = useUser();
-  console.log(user?.unsafeMetadata);
+  const metadata = user?.unsafeMetadata as UserData | undefined;
+  const added = metadata?.words?.[word];
 
   const handleFlashcard = () => {
-    const word = definition?.japanese[readingIndex].word;
     if (!user) return;
-    const metadata = user.unsafeMetadata as UserData;
-    if (!metadata.words) metadata.words = {};
+    if (!metadata) return;
 
-    if (metadata.words[word!]) {
-      //memorization
-      if (metadata.words[word!].memorizationRate >= 5) {
-        delete metadata.words[word!];
-      } else {
-        metadata.words[word!].memorizationRate = 0;
-      }
-    } else {
-      metadata.words[word!] = { memorizationRate: 0, furigana: "", utga: "" };
-    }
+    if (!metadata.words) metadata.words = {};
+    if (metadata.words[word]) return;
+
+    metadata.words[word] = { memorizationRate: 1 };
 
     user
       .update({ unsafeMetadata: metadata })
@@ -41,7 +34,7 @@ export const DefinitionCard = ({ word }: Props) => {
     <div className="w-full rounded-lg bg-gray-800 text-white p-4">
       {definition ? (
         <div className="flex flex-col gap-4">
-          <div className="flex w-full gap-4 justify-between">
+          <div className="flex w-full gap-4 justify-between items-center">
             <div>
               <h1 className="text-[10px]">
                 {definition.japanese[readingIndex].reading}
@@ -52,13 +45,18 @@ export const DefinitionCard = ({ word }: Props) => {
               >
                 {definition.japanese[readingIndex].word}
               </h1>
-              <button
-                className="bg-white rounded text-black px-3 hover:bg-slate-300"
-                onClick={handleFlashcard}
-              >
-                add
-              </button>
             </div>
+            {user &&
+              (!added ? (
+                <button
+                  className="bg-white rounded text-black px-3 hover:bg-slate-300 text-sm"
+                  onClick={handleFlashcard}
+                >
+                  Add to reviews list
+                </button>
+              ) : (
+                <p className="text-sm text-gray-400">Added to list...</p>
+              ))}
             <div className="flex gap-4">
               <button
                 onClick={() => setReadingIndex((i) => Math.max(i - 1, 0))}
