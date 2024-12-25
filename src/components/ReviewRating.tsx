@@ -15,7 +15,7 @@ export const ReviewRating = ({ onRate, rating }: Props) => {
     >
       {[1, 2, 3, 4, 5].map((rate) => (
         <div
-          className={`rounded-full border-[2px] p-2 aspect-square text-sm border-white ${
+          className={`border-[2px] p-2 aspect-square text-sm border-white ${
             rate <= rating
               ? "bg-green-300 text-black"
               : rate <= hoverRating

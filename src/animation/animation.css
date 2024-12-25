@@ -1,43 +1,40 @@
-@keyframes pixelAnimation {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+/* Add the keyframes for color animation */
+@keyframes animateColor {
+  0% {
+    filter: hue-rotate(0deg);
   }
+  25% {
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    filter: hue-rotate(270deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
 
-  .pixel-animation {
-    animation: pixelAnimation 0.3s ease-in-out;
-    background-color: rgba(255, 0, 0, 0.5); /* Temporary for debugging */
-  }
+/* Apply the animation to the dot class */
+.dot {
+  animation: animateColor 5s linear infinite; /* Connect the animation */
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 0, 255, 0.6); /* Neon glow effect */
+}
 
-  @keyframes popAnimation {
-    0% {
-        transform: translate(0, 100%) scale(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translate(0, -50%) scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: translate(0, -100%) scale(0);
-        opacity: 0;
-    }
-  }
+/* src/components/AudioAnimation.css */
+@keyframes audioAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
 
-  .cube {
-    width: 50px;
-    height: 50px;
-    background-color: rgba(0, 255, 255, 0.8); /* Neon color */
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    border-radius: 10px;
-    animation: popAnimation 0.5s ease forwards;
-  }
+.animate {
+  animation: audioAnimation 1s ease-in-out;
+}
 
-  .container {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* Full height for demonstration */
-    overflow: hidden; /* Hide overflow */
-  }
+input:checked + div .dot {
+  transform: translateX(100%);
+}
+

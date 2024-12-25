@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { KanjiFlashcard } from "../../components/Flashcard";
 import { useUser } from "@clerk/clerk-react";
-
-import NeonCubes from "../../components/NeonCubes";
 import { UserData } from "../../types/UserDataType";
 import { ReviewRating } from "../../components/ReviewRating";
 
@@ -49,7 +47,6 @@ export const Review = () => {
     <section className="container flex flex-col items-center gap-8 p-8">
       {user ? (
         <>
-          <NeonCubes />
           <h1 className="text-4xl font-bold">Review Page</h1>
           {currentCard < words.length ? (
             <KanjiFlashcard
@@ -88,7 +85,7 @@ export const Review = () => {
               </button>
               {rating > 0 && (
                 <button
-                  className="rounded-xl bg-blue-300 text-black p-2"
+                  className="dot rounded-xl bg-blue-300 text-black p-2"
                   onClick={() => handleNext(rating)}
                 >
                   Next
