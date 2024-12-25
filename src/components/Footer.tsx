@@ -9,19 +9,24 @@ export const Footer = () => {
         <div className="flex-1">
           <h4 className="text-2xl font-bold">{t("Our Address")}</h4>
           <p>
-            Монгол улс Улаанбаатар Баянзүрх Манлай баатар Дамдинсүрэн 43 Шинэ
-            Монгол Технологийн коллеж
+            {t(
+              "Монгол улс Улаанбаатар Баянзүрх Манлай баатар Дамдинсүрэн 43 Шинэ Монгол Технологийн коллеж"
+            )}
           </p>
         </div>
         <div className="flex-1">
           <h4 className="text-2xl font-bold">{t("Company Info")}</h4>
           <p>{t("VAT")}: 75777799</p>
           <p>{t("Company no.")}: 11843590</p>
-          <p>{t("Registered in")}: {t("Ulaanbaatar")}</p>
+          <p>
+            {t("Registered in")}: {t("Ulaanbaatar")}
+          </p>
         </div>
         <div className="flex-1">
           <h4 className="text-2xl font-bold">{t("Follow us")}</h4>
-          <p>{t("Fb")} | {t("Tw")} | {t("Ig")} | {t("Li")}</p>
+          <p>
+            {t("Fb")} | {t("Tw")} | {t("Ig")} | {t("Li")}
+          </p>
         </div>
         <div className="flex-1">
           <h4 className="text-2xl font-bold">{t("Contact")}</h4>
