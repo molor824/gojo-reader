@@ -5,6 +5,9 @@ import { useUser } from "@clerk/clerk-react";
 
 import NeonCubes from "../../components/NeonCubes";
 
+const REVEAL_DURATION = 1000;
+const ANIMATION_START_DURATION = 500;
+
 export const Review = () => {
   const { user } = useUser();
   const [readingIndex, setReadingIndex] = useState(0);
@@ -27,22 +30,24 @@ export const Review = () => {
     <section className="container flex flex-col items-center gap-8 p-8">
       <div className="relative max-w-96 w-full max-h-56 h-full">
         {currentCard && (
-          <div className="absolute">
-            <NeonCubes />
-          </div>
+          <NeonCubes
+            minDuration={ANIMATION_START_DURATION}
+            maxDuration={REVEAL_DURATION}
+          />
         )}
 
         <KanjiFlashcard
           reveal={reveal}
           onClick={() => {
-            if(reveal) return ; setCurrentCard(true);
+            if (reveal) return;
+            setCurrentCard(true);
             setTimeout(() => {
               setCurrentCard(false);
-            }, 9500);
+            }, REVEAL_DURATION * 2);
 
             setTimeout(() => {
               setReveal(true);
-            }, 5000);
+            }, REVEAL_DURATION);
           }}
           word={word}
           furigana={definition?.japanese[0].reading}
@@ -50,7 +55,8 @@ export const Review = () => {
         />
       </div>
       {reveal && (
-        <button className="dot p-2 w-32 rounded-2xl"
+        <button
+          className="dot p-2 w-32 rounded-2xl"
           onClick={() => {
             setReveal(false);
             setCurrentCard(false);
