@@ -33,3 +33,8 @@
 .animate {
   animation: audioAnimation 1s ease-in-out;
 }
+
+input:checked + div .dot {
+  transform: translateX(100%);
+}
+

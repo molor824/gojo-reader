@@ -67,18 +67,20 @@ export const Header = () => {
         </div>
 
         <div className="md:flex items-center">
-          <button
-            className="text-gray-200 text-2xl hover:bg-white/20 p-2 rounded-lg"
-            onClick={() => changeLanguage("mn")}
-          >
-            Монгол
-          </button>
-          <button
-            className="text-gray-200 text-2xl hover:bg-white/20 p-2 rounded-lg ml-2"
-            onClick={() => changeLanguage("en")}
-          >
-            English
-          </button>
+          <label className="flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="hidden"
+              onChange={(e) => changeLanguage(e.target.checked ? "en" : "mn")}
+            />
+            <div className="relative">
+              <div className="block bg-gray-200 w-14 h-8 rounded-full transition-colors duration-300"></div>
+              <div className="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-300"></div>
+            </div>
+            <span className="ml-3 text-gray-200 text-2xl">
+              {t("switchLanguage")}
+            </span>
+          </label>
         </div>
 
         <button className="md:hidden p-2" onClick={() => setExtend((e) => !e)}>
