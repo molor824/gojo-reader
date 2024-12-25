@@ -66,7 +66,7 @@ export const Header = () => {
           </SignedIn>
         </div>
 
-        <div className="md:flex items-center">
+        <div className="md:flex items-center ml-4">
           <label className="flex items-center cursor-pointer">
             <input
               type="checkbox"
@@ -74,8 +74,8 @@ export const Header = () => {
               onChange={(e) => changeLanguage(e.target.checked ? "en" : "mn")}
             />
             <div className="relative">
-              <div className="block bg-gray-200 w-14 h-8 rounded-full transition-colors duration-300"></div>
-              <div className="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition-transform duration-300"></div>
+              <div className="block bg-gray-800 w-14 h-8 rounded-full transition-colors duration-300"></div>
+              <div className="dot absolute left-1 top-1 bg-black w-6 h-6 rounded-full transition-transform duration-300"></div>
             </div>
             <span className="ml-3 text-gray-200 text-2xl">
               {t("switchLanguage")}
