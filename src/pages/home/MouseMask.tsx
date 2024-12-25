@@ -5,6 +5,9 @@ type Props = {
   greetingJp: string;
 };
 
+const BUBBLE_WIDTH = 300;
+const BUBBLE_HEIGHT = 300;
+
 export const MouseMask = ({ greeting, greetingJp }: Props) => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [visible, setVisible] = useState(false);
@@ -59,9 +62,11 @@ export const MouseMask = ({ greeting, greetingJp }: Props) => {
         onMouseMove={handleMouseMove}
       >
         <div
-          className="hidden sm:block fixed top-0 left-0 w-[200px] h-[200px] transition-[width,height,opacity] border-2 rounded-full overflow-hidden bg-black"
+          className="hidden sm:block fixed top-0 left-0 transition-[width,height,opacity] border-2 rounded-full overflow-hidden bg-black"
           style={{
             transform: `translate(calc(${mousePos.x}px - 50%), calc(${mousePos.y}px - 50%))`,
+            width: `${BUBBLE_WIDTH}px`,
+            height: `${BUBBLE_HEIGHT}px`,
             opacity: visible ? 1 : 0,
           }}
         >
@@ -70,9 +75,9 @@ export const MouseMask = ({ greeting, greetingJp }: Props) => {
             style={{
               width: maskRect.width,
               height: maskRect.height,
-              transform: `translate(${maskRect.left - mousePos.x + 100}px, ${
-                maskRect.top - mousePos.y + 100
-              }px)`,
+              transform: `translate(${
+                maskRect.left - mousePos.x + BUBBLE_WIDTH / 2
+              }px, ${maskRect.top - mousePos.y + BUBBLE_HEIGHT / 2}px)`,
             }}
           >
             {greetingJp}
