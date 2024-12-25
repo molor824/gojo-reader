@@ -1,4 +1,5 @@
-import { speak } from "../speech/speech";
+
+import AudioAnimation from './AudioAnimation'; // Import the new component
 
 interface KanjiProps {
   furigana?: string;
@@ -24,8 +25,9 @@ export const KanjiFlashcard = ({
       </p>
 
       <div className="hover:text-blue-300 hover:cursor-pointer">
-        <h2 className={`text-3xl font-semibold `} onClick={() => speak(word)}>
-          🔊{word}
+        <h2 className={`text-3xl font-semibold `} >
+          {/* 🔊{word} */}
+          <AudioAnimation word={word}  />
         </h2>
       </div>
 

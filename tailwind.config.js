@@ -25,6 +25,7 @@ module.exports = {
           '100%': { transform: 'translateY(-100%) scale(0)', opacity: '0' },
         },
       },
+      
     },
   },
   plugins: [

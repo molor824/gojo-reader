@@ -5,7 +5,6 @@ import { useUser } from "@clerk/clerk-react";
 
 import NeonCubes from "../../components/NeonCubes";
 
-
 export const Review = () => {
   const { user } = useUser();
   const [readingIndex, setReadingIndex] = useState(0);
@@ -22,26 +21,39 @@ export const Review = () => {
   console.log(definition);
 
   const [reveal, setReveal] = useState(false);
-  const [currentCard, setCurrentCard] = useState(0);
+  const [currentCard, setCurrentCard] = useState(false);
 
   return (
     <section className="container flex flex-col items-center gap-8 p-8">
-      <NeonCubes />
-      <div className="max-w-64 w-full">
-        
+      <div className="relative max-w-96 w-full max-h-56 h-full">
+        {currentCard && (
+          <div className="absolute">
+            <NeonCubes />
+          </div>
+        )}
+
         <KanjiFlashcard
           reveal={reveal}
-          onClick={() => setReveal(true)}
+          onClick={() => {
+            if(reveal) return ; setCurrentCard(true);
+            setTimeout(() => {
+              setCurrentCard(false);
+            }, 9500);
+
+            setTimeout(() => {
+              setReveal(true);
+            }, 5000);
+          }}
           word={word}
           furigana={definition?.japanese[0].reading}
           answer={definition?.senses[0].english_definitions[0]!}
         />
       </div>
       {reveal && (
-        <button
+        <button className="dot p-2 w-32 rounded-2xl"
           onClick={() => {
             setReveal(false);
-            setCurrentCard((c) => c + 1);
+            setCurrentCard(false);
             setReadingIndex((c) => c + 1);
           }}
         >
