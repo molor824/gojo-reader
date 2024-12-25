@@ -31,8 +31,8 @@ const NeonCubes = ({ minDuration, maxDuration }: Props) => {
           const x = (col / cols) * containerWidth;
           const y = (row / rows) * containerHeight;
 
-          dot.style.left = `${x + 8}px`; // Set the x position
-          dot.style.top = `${y + 8}px`; // Set the y position
+          dot.style.left = `${x + 6}px`; // Set the x position
+          dot.style.top = `${y + 6}px`; // Set the y position
           container.appendChild(dot);
         }
       }
@@ -42,7 +42,7 @@ const NeonCubes = ({ minDuration, maxDuration }: Props) => {
         targets: dotAll,
         easing: "easeInOutExpo",
         loop: 1,
-        // delay: anime.stagger(15),
+        delay: anime.stagger(1),
       });
 
       animation
@@ -64,12 +64,10 @@ const NeonCubes = ({ minDuration, maxDuration }: Props) => {
   }, []);
 
   return (
-    <div className="absolute w-full h-full left-0 top-0">
-      <div
-        ref={containerRef}
-        className="relative w-96 h-40 overflow-hidden"
-      ></div>
-    </div>
+    <div
+      className="absolute w-full h-full left-0 top-0 overflow-hidden"
+      ref={containerRef}
+    ></div>
   );
 };
 

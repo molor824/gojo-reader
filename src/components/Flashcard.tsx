@@ -19,6 +19,7 @@ export const KanjiFlashcard = ({
 }: KanjiProps) => {
   const definition = useDefinitionHook(word);
   const furigana = definition?.japanese[0].reading;
+  const meaning = definition?.senses[0].english_definitions.join("; ");
   const [revealAnimation, setRevealAnimation] = useState(false);
 
   return (
@@ -34,39 +35,23 @@ export const KanjiFlashcard = ({
         setTimeout(() => setRevealAnimation(false), revealDuration * 2);
       }}
     >
-      {revealAnimation && (
-        <NeonCubes
-          minDuration={minRevealDuration}
-          maxDuration={revealDuration}
-        />
-      )}
-      {reveal && furigana && (
-        <p className="text-gray-700 text-lg">{furigana}</p>
-      )}
+      <p className={`text-gray-700 text-lg ${reveal ? "" : "invisible"}`}>
+        {furigana ?? "Loading..."}
+      </p>
       <div className="hover:text-blue-300 hover:cursor-pointer">
         <h2 className={`text-3xl font-semibold `}>
           {/* 🔊{word} */}
           <AudioAnimation word={word} />
         </h2>
       </div>
-      {reveal && definition && (
-        <div className="flex flex-col gap-4 max-w-[400px] w-full overflow-y-scroll max-h-[300px] p-4 rounded-xl bg-gray-100 text-start">
-          {definition.senses.map(
-            ({ english_definitions, parts_of_speech }, index) => (
-              <div key={index} className="flex gap-2">
-                <h2 className="text-lg font-bold">{index + 1}.</h2>
-                <div>
-                  <h2 className="text-lg font-bold">
-                    {english_definitions.join("; ")}
-                  </h2>
-                  <p className="text-sm text-gray-500">
-                    {parts_of_speech.join(". ")}
-                  </p>
-                </div>
-              </div>
-            )
-          )}
-        </div>
+      <h2 className={`text-lg font-bold ${reveal ? "" : "invisible"}`}>
+        {meaning ?? "Loading..."}
+      </h2>
+      {revealAnimation && (
+        <NeonCubes
+          minDuration={minRevealDuration}
+          maxDuration={revealDuration}
+        />
       )}
     </div>
   );
