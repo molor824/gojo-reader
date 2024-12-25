@@ -1,0 +1,40 @@
+/* Add the keyframes for color animation */
+@keyframes animateColor {
+  0% {
+    filter: hue-rotate(0deg);
+  }
+  25% {
+    filter: hue-rotate(90deg);
+  }
+  50% {
+    filter: hue-rotate(180deg);
+  }
+  75% {
+    filter: hue-rotate(270deg);
+  }
+  100% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+/* Apply the animation to the dot class */
+.dot {
+  animation: animateColor 5s linear infinite; /* Connect the animation */
+  box-shadow: 0 0 3px rgba(255, 255, 255, 0.8), 0 0 10px rgba(255, 0, 255, 0.6); /* Neon glow effect */
+}
+
+/* src/components/AudioAnimation.css */
+@keyframes audioAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.animate {
+  animation: audioAnimation 1s ease-in-out;
+}
+
+input:checked + div .dot {
+  transform: translateX(100%);
+}
+

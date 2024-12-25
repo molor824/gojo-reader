@@ -6,6 +6,8 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/clerk-react";
+import { useTranslation } from "react-i18next";
+import i18n from "i18next";
 
 const NAVBAR_ITEMS = [
   { title: "Home", link: "/" },
@@ -15,8 +17,14 @@ const NAVBAR_ITEMS = [
 ];
 
 export const Header = () => {
+  const { t } = useTranslation();
   const location = useLocation();
   const [extend, setExtend] = useState(false);
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
     <header className="sticky w-full top-0 z-50 px-6 py-4 bg-black/50 backdrop-blur-sm">
       <nav className="flex justify-between items-center container mx-auto">
@@ -33,32 +41,48 @@ export const Header = () => {
                 location.pathname === link ? "font-bold" : ""
               } text-gray-200 text-2xl hover:bg-white/20 p-2 px-4`}
             >
-              {title}
+              {t(title)}
             </Link>
           ))}
 
           <SignedOut>
             <SignInButton>
-              <button className=" border text-2xl rounded-2xl p-2 text-gray-200 hover:bg-white/20  px-4">
-                Нэвтрэх
+              <button className="border text-2xl rounded-2xl p-2 text-gray-200 hover:bg-white/20 px-4">
+                {t("signIn")}
               </button>
             </SignInButton>
           </SignedOut>
 
           <SignedIn>
-            <UserButton 
+            <UserButton
               showName
               appearance={{
                 elements: {
                   userButtonAvatarBox: "border-2 border-white",
-                  userButtonTrigger: "text-white hover:opacity-75"
-                }
+                  userButtonTrigger: "text-white hover:opacity-75",
+                },
               }}
             />
           </SignedIn>
         </div>
 
-        {/* Mobile menu button */}
+        <div className="md:flex items-center ml-4">
+          <label className="flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              className="hidden"
+              onChange={(e) => changeLanguage(e.target.checked ? "en" : "mn")}
+            />
+            <div className="relative">
+              <div className="block bg-gray-800 w-14 h-8 rounded-full transition-colors duration-300"></div>
+              <div className="dot absolute left-1 top-1 bg-black w-6 h-6 rounded-full transition-transform duration-300"></div>
+            </div>
+            <span className="ml-3 text-gray-200 text-2xl">
+              {t("switchLanguage")}
+            </span>
+          </label>
+        </div>
+
         <button className="md:hidden p-2" onClick={() => setExtend((e) => !e)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -91,27 +115,32 @@ export const Header = () => {
                   location.pathname === link ? "font-bold" : ""
                 }`}
               >
-                {title}
+                {t(title)}
               </Link>
             ))}
-            <li className="mx-4 my-6 md:my-0 border-white hover:border-gray-200 border-4 rounded-xl duration-500">
-              <SignedOut>
-                <SignInButton>Нэвтрэх</SignInButton>
-              </SignedOut>
-             
-
-              <SignedIn>
-                <UserButton 
+            <SignedOut>
+              <div className="m-1">
+                <SignInButton>
+                  <button className="hover:bg-white/20 w-full p-1 rounded-lg border-white border-[1px]">
+                    {t("signIn")}
+                  </button>
+                </SignInButton>
+              </div>
+            </SignedOut>
+            <SignedIn>
+              <div className="hover:bg-white/20">
+                <UserButton
                   showName
                   appearance={{
                     elements: {
-                      userButtonAvatarBox: "border-2 border-white",
-                      userButtonTrigger: "text-white hover:opacity-75"
-                    }
+                      userButtonAvatarBox: "border-[2px] border-white",
+                      userButtonTrigger: "text-white hover:opacity-75",
+                      userButtonBox: "p-2",
+                    },
                   }}
                 />
-              </SignedIn>
-            </li>
+              </div>
+            </SignedIn>
           </div>
         </>
       )}
