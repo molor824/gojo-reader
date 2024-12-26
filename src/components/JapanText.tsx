@@ -14,7 +14,7 @@ export const JapanText = ({ text }: Props) => {
   const words = useMemo(() => text.split(" "), [text]);
 
   return (
-    <div className="w-full 2xl:text-xl">
+    <div className="w-full text-3xl leading-loose sm:text-2xl sm:leading-loose md:text-3xl md:leading-loose lg:text-3xl lg:leading-loose lg: h-[650px]">
       {words.map((word, index) => (
         <JapanWord
           word={word}
