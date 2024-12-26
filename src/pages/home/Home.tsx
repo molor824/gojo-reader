@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { MouseMask } from "./MouseMask";
 import { motion, AnimatePresence } from "framer-motion";
 import { BackgroundGradientAnimation } from "../../components/ui/background-gradient-animation";
+import { useTranslation } from "react-i18next";
 
 const GREETING = "Welcome to Gojo-Reader!";
 const GREETING_JP = "ゴジョーリーダーへようこそ!";
 
 export const Home = () => {
+  const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -52,7 +54,7 @@ export const Home = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 2 }}
         >
-          <MouseMask greeting={GREETING} greetingJp={GREETING_JP} />
+          <MouseMask greeting={t(GREETING)} greetingJp={GREETING_JP} />
         </motion.section>
       </BackgroundGradientAnimation>
     </>
