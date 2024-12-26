@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { MouseMask } from "../../components/ui/MouseMask";
+import { MouseMask } from "./MouseMask";
 import { motion, AnimatePresence } from "framer-motion";
 import { BackgroundGradientAnimation } from "../../components/ui/background-gradient-animation";
 
@@ -23,7 +23,7 @@ export const Home = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <motion.h1 
+            <motion.h1
               className="text-white text-4xl font-bold"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -52,10 +52,7 @@ export const Home = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 2 }}
         >
-          <MouseMask 
-            greeting={GREETING} 
-            greetingJp={GREETING_JP} 
-          />
+          <MouseMask greeting={GREETING} greetingJp={GREETING_JP} />
         </motion.section>
       </BackgroundGradientAnimation>
     </>
