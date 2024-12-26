@@ -46,7 +46,7 @@ const NeonCubes = ({ minDuration, maxDuration }: Props) => {
         targets: dotAll,
         easing: "easeInOutExpo",
         loop: 1,
-        delay: anime.stagger(4),
+        // delay: anime.stagger(4),
       });
 
       animation
