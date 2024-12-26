@@ -35,5 +35,15 @@
     "N2": "N2",
     "N1": "N1",
     "Reader Page - Level:": "Унших текст - Түвшин:",
-    "Reading not found.": "Унших текст олдсонгүй."
+    "Reading not found.": "Унших текст олдсонгүй.",
+    "noWordsLeft": "Шалгах үгс үлдсэнгүй",
+    "reReviewPrompt": "Та үгсээ дахин шалгах уу?",
+    "reReviewButton": "Дахин шалгах",
+    "noWordsInList": "Таны шалгах жагсаалтад үгс байхгүй байна",
+    "addWordsPrompt": "Унших хуудас руу орж үгсээ шалгах жагсаалтад нэмнэ үү",
+    "howWellDidYouGuess": "Та хэр сайн таав?",
+    "removeWord": "Энэ үгийг устгах",
+    "next": "Дараагийнх",
+    "loading": "Түр хүлээнэ үү...",
+    "pleaseSignIn": "Нэвтрэхийг хүсч байна"
 }
