@@ -3,9 +3,11 @@ import { KanjiFlashcard } from "../../components/Flashcard";
 import { useUser } from "@clerk/clerk-react";
 import { UserData } from "../../types/UserDataType";
 import { ReviewRating } from "../../components/ReviewRating";
+import { useTranslation } from "react-i18next";
 
 export const Review = () => {
   const { user, isLoaded } = useUser();
+  const { t } = useTranslation();
   const [reveal, setReveal] = useState(false);
   const [currentCard, setCurrentCard] = useState(0);
   const [rating, setRating] = useState(0);
@@ -47,7 +49,7 @@ export const Review = () => {
     <section className="container flex flex-col items-center gap-8 p-8">
       {user ? (
         <>
-          <h1 className="text-4xl font-bold">Review Page</h1>
+          <h1 className="text-4xl font-bold">{t("Review")}</h1>
           {currentCard < words.length ? (
             <KanjiFlashcard
               word={currentWord}
@@ -56,48 +58,46 @@ export const Review = () => {
             />
           ) : words.length > 0 ? (
             <>
-              <h2>No words left to review</h2>
-              <p>Would you like to re-review your words?</p>
+              <h2>{t("noWordsLeft")}</h2>
+              <p>{t("reReviewPrompt")}</p>
               <button
                 onClick={handleReReview}
                 className="bg-green-300 hover:bg-green-400 rounded-xl p-2"
               >
-                Re-review
+                {t("reReviewButton")}
               </button>
             </>
           ) : (
             <>
-              <h2>There are no words to review in your review list</h2>
-              <p>
-                Add some words to your review list by going to the reading page
-              </p>
+              <h2>{t("noWordsInList")}</h2>
+              <p>{t("addWordsPrompt")}</p>
             </>
           )}
           {reveal && (
             <div className="flex flex-col items-center gap-8 p-8 text-white text-center">
-              <h1 className="text-4xl font-bold">How well did you guess?</h1>
+              <h1 className="text-4xl font-bold">{t("howWellDidYouGuess")}</h1>
               <ReviewRating rating={rating} onRate={setRating} />
               <button
                 onClick={() => handleNext(0)}
                 className="hover:underline text-gray-600 hover:text-gray-400"
               >
-                Remove this word
+                {t("removeWord")}
               </button>
               {rating > 0 && (
                 <button
                   className="dot rounded-xl bg-blue-300 text-black p-2"
                   onClick={() => handleNext(rating)}
                 >
-                  Next
+                  {t("next")}
                 </button>
               )}
             </div>
           )}
         </>
       ) : !isLoaded ? (
-        <div>Loading...</div>
+        <div>{t("loading")}</div>
       ) : (
-        <div>Please sign in</div>
+        <div>{t("pleaseSignIn")}</div>
       )}
     </section>
   );

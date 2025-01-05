@@ -35,5 +35,15 @@
     "N2": "N2",
     "N1": "N1",
     "Reader Page - Level:": "Reader Page - Level:",
-    "Reading not found.": "Reading not found."
+    "Reading not found.": "Reading not found.",
+    "noWordsLeft": "No words left to review",
+    "reReviewPrompt": "Would you like to re-review your words?",
+    "reReviewButton": "Re-review",
+    "noWordsInList": "There are no words to review in your review list",
+    "addWordsPrompt": "Add some words to your review list by going to the reading page",
+    "howWellDidYouGuess": "How well did you guess?",
+    "removeWord": "Remove this word",
+    "next": "Next",
+    "loading": "Loading...",
+    "pleaseSignIn": "Please sign in"
 }
