@@ -37,26 +37,7 @@ export const Home = () => {
         )}
       </AnimatePresence>
 
-      <BackgroundGradientAnimation
-        gradientBackgroundStart="rgb(0, 0, 0)"
-        gradientBackgroundEnd="rgb(0, 0, 0)"
-        firstColor="30, 30, 30"
-        secondColor="40, 40, 40"
-        thirdColor="50, 50, 50"
-        fourthColor="60, 60, 60"
-        fifthColor="70, 70, 70"
-        pointerColor="80, 80, 80"
-        blendingValue="soft-light"
-      >
-        <motion.section
-          className="w-full min-h-screen flex items-center justify-center"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 2 }}
-        >
-          <MouseMask greeting={t(GREETING)} greetingJp={GREETING_JP} />
-        </motion.section>
-      </BackgroundGradientAnimation>
+      <MouseMask greeting={t(GREETING)} greetingJp={GREETING_JP} />
     </>
   );
 };
